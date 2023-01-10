@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainToolBar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="135dp"
+            android:layout_height="70dp"
+            android:src="@drawable/instagram" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/addPost"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/ic_plus" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/heart"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/ic_favorite_border" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/dm"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/ic_send_dm" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</androidx.appcompat.widget.Toolbar>

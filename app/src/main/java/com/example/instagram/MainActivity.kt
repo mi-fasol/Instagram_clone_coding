@@ -1,21 +1,82 @@
 package com.example.instagram
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
+import android.util.Log
+import android.view.View
+import android.widget.Button
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
+    private var googleSignInClient: GoogleSignInClient? = null
+    private var auth: FirebaseAuth? = null
+    private val RC_SIGN_IN = 9001
+
+    val user = auth?.currentUser
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Handler().postDelayed({
-            val intent = Intent(this, HomePage::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-            startActivity(intent)
-            finish()
-        }, 3000)
+        val btnGoogleLogin: Button = findViewById(R.id.google_login)
+
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
+
+        auth = FirebaseAuth.getInstance()
+
+        if (user != null) {
+            toHomeActivity()
+        } else {
+            Log.d("isNull", "널값이다")
+            btnGoogleLogin.visibility = View.VISIBLE
+            btnGoogleLogin.setOnClickListener {
+                val signInIntent = googleSignInClient?.signInIntent
+                startActivityForResult(signInIntent, RC_SIGN_IN)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)
+                firebaseAuthWithGoogle(account)
+            } catch (e: ApiException) {
+            }
+        }
+    }
+
+    private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
+        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+        auth!!.signInWithCredential(credential)
+            .addOnCompleteListener(this) {
+                if (it.isSuccessful) {
+                    toHomeActivity()
+                } else {
+                    Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    private fun toHomeActivity() {
+        val intent = Intent(this, HomePage::class.java)
+        startActivity(intent)
+        finish()
     }
 }

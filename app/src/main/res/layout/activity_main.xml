@@ -14,7 +14,18 @@
         android:layout_gravity="center"
         android:src="@drawable/main_logo" />
 
+        <Button
+            android:id="@+id/google_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/text_logo"
+            android:layout_marginBottom="60dp"
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible"
+            android:text="구글 로그인"/>
+
     <ImageView
+        android:id="@+id/text_logo"
         android:layout_width="110dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"

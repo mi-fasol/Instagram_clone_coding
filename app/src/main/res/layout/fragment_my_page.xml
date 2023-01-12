@@ -5,11 +5,51 @@
     android:layout_height="match_parent"
     tools:context=".MyPageFragment">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/signOutBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign Out"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="mi_.fasol"
+                android:textSize="30dp"
+                android:layout_marginLeft="25dp"
+                android:textColor="@color/black"
+                android:layout_centerVertical="true"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/addPost"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginRight="25dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/menu"
+                android:background="@drawable/ic_plus" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/menu"
+                android:layout_width="35dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/ic_baseline_menu_24" />
+        </RelativeLayout>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/signOutBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign Out"
+            />
+
+    </LinearLayout>
 </FrameLayout>

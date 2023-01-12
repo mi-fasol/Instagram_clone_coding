@@ -1,8 +1,6 @@
 package com.example.instagram
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -13,29 +11,6 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         var bottomNav = findViewById<BottomNavigationView>(R.id.bnv_main)
-
-        var postBtn: Button = findViewById(R.id.addPost)
-        var heartBtn: Button = findViewById(R.id.heart)
-        var chatBtn: Button = findViewById(R.id.dm)
-
-
-        postBtn.setOnClickListener {
-            val intent = Intent(this, PostActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        heartBtn.setOnClickListener {
-            val intent = Intent(this, NotificationActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        chatBtn.setOnClickListener {
-            val intent = Intent(this, ChatActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
 
         bottomNav.run {
             setOnNavigationItemSelectedListener {
@@ -49,6 +24,16 @@ class HomeActivity : AppCompatActivity() {
                         val searchFragment = SearchFragment()
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.fl_container, searchFragment).commit()
+                    }
+                    R.id.nav_video -> {
+                        val videoFragment = VideoFragment()
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.fl_container, videoFragment).commit()
+                    }
+                    R.id.nav_shopping -> {
+                        val shoppingFragment = ShoppingFragment()
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.fl_container, shoppingFragment).commit()
                     }
                     else -> {
                         val myPageFragment = MyPageFragment()

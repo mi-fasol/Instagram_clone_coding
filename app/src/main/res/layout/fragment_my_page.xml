@@ -5,9 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".MyPageFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="마이페이지지롱" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/signOutBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Out"
+        />
 
 </FrameLayout>

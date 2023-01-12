@@ -5,9 +5,57 @@
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="홈페이지지롱" />
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="135dp"
+                android:layout_height="70dp"
+                android:src="@drawable/instagram"
+                android:layout_marginLeft="20dp"
+                />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/addPost"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/ic_plus" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/heart"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/ic_favorite_border" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/dm"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/ic_send_dm" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="홈페이지지롱" />
+
+    </LinearLayout>
 
 </FrameLayout>

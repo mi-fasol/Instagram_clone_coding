@@ -24,6 +24,18 @@ class HomeActivity : AppCompatActivity() {
             finish()
         }
 
+        heartBtn.setOnClickListener {
+            val intent = Intent(this, NotificationActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        chatBtn.setOnClickListener {
+            val intent = Intent(this, ChatActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         bottom_nav.run{ setOnNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.nav_home ->{

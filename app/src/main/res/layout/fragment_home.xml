@@ -30,22 +30,22 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/addPost"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginRight="25dp"
                     android:background="@drawable/ic_plus" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/heart"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginRight="25dp"
                     android:background="@drawable/ic_favorite_border" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/dm"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginRight="25dp"
                     android:background="@drawable/ic_send_dm" />
             </LinearLayout>

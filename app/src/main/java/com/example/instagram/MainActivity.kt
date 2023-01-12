@@ -4,13 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
@@ -27,7 +28,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val btnGoogleLogin: Button = findViewById(R.id.google_login)
+        val signInButton: SignInButton = findViewById(R.id.google_login)
+        val googleTextView: TextView = signInButton.getChildAt(0) as TextView
+        googleTextView.text = "구글로 로그인            "
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -42,8 +45,8 @@ class MainActivity : AppCompatActivity() {
             toHomeActivity()
         } else {
             Log.d("isNull", "널값이다")
-            btnGoogleLogin.visibility = View.VISIBLE
-            btnGoogleLogin.setOnClickListener {
+            signInButton.visibility = View.VISIBLE
+            signInButton.setOnClickListener {
                 val signInIntent = googleSignInClient?.signInIntent
                 startActivityForResult(signInIntent, RC_SIGN_IN)
             }
@@ -75,7 +78,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun toHomeActivity() {
-        val intent = Intent(this, HomePage::class.java)
+        val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         finish()
     }

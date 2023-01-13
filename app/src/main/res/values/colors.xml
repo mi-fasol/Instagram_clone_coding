@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="lightGrey">#E6E6E6</color>
     <color name="profileEdit">#EEEEEE</color>
+    <color name="profileBorder">#D6D6D6</color>
 
 </resources>

@@ -40,8 +40,7 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

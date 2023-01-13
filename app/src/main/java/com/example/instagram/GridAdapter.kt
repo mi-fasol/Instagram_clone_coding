@@ -25,7 +25,6 @@ class GridAdapter() :
 
         init {
             postImage = itemView.findViewById(R.id.myPagePost)
-
             itemView.setOnClickListener {
             }
         }

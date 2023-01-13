@@ -44,15 +44,17 @@ class MyPageFragment : Fragment() {
 
         val view: View = inflater!!.inflate(R.layout.fragment_my_page, container, false)
 
-        view.findViewById<Button>(R.id.signOutBtn)?.setOnClickListener{
-            signOut()
-        }
 
         view.findViewById<Button>(R.id.menu).setOnClickListener {
             val bottomSheet = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
             val bottomSheetView = BottomSheetDialog(requireContext())
             bottomSheetView.setContentView(bottomSheet)
             bottomSheetView.show()
+
+        }
+
+        view.findViewById<Button>(R.id.editProfile).setOnClickListener{
+            signOut()
         }
 
         // Return the fragment view/layout
@@ -71,7 +73,6 @@ class MyPageFragment : Fragment() {
     private fun signOut() {
         auth?.signOut()
         googleSignInClient?.signOut()
-
         val intent = Intent(requireActivity(), MainActivity::class.java)
         startActivity(intent)
     }

@@ -9,6 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.GridView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -18,6 +22,9 @@ import com.google.firebase.auth.FirebaseAuth
 class MyPageFragment : Fragment() {
     private var googleSignInClient: GoogleSignInClient? = null
     private var auth: FirebaseAuth? = null
+    private var layoutManager: RecyclerView.LayoutManager? = null
+    private var adapter: RecyclerView.Adapter<PostAdapter.ViewHolder>? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -50,6 +57,15 @@ class MyPageFragment : Fragment() {
 
         // Return the fragment view/layout
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        var gv = view.findViewById<RecyclerView>(R.id.gv_myPage)
+        gv.apply{
+            layoutManager = GridLayoutManager(activity, 3)
+            adapter = GridAdapter()
+        }
     }
 
     private fun signOut() {

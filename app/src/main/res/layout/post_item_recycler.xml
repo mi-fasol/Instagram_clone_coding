@@ -25,6 +25,7 @@
             android:src="@drawable/profile_image" />
 
         <TextView
+            android:id="@+id/pUserNick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -37,14 +38,18 @@
             />
 
         <ImageView
+            android:id="@+id/postMenu"
             android:layout_width="28dp"
-            android:layout_height="30dp"
+            android:layout_height="28dp"
             android:src="@drawable/ic_baseline_more_horiz_24"
             android:layout_alignParentRight="true"
+
+            android:layout_centerVertical="true"
             />
     </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/postImage"
         android:layout_width="match_parent"
         android:layout_height="414dp"
         android:src="@drawable/profile_image" />
@@ -96,6 +101,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
     <TextView
+        android:id="@+id/postNickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="mi_fasol"
@@ -104,6 +110,7 @@
         android:layout_marginLeft="10dp"
         />
         <TextView
+            android:id="@+id/postContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="남자칭구가 목도리를 사줘따. 따뜻해따."
@@ -116,6 +123,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
+            android:id="@+id/cNickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="eoirnx_oegvzn"
@@ -124,6 +132,7 @@
             android:layout_marginLeft="10dp"
             />
         <TextView
+            android:id="@+id/userComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="그 남찡구가 나다."

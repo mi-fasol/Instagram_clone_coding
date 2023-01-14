@@ -1,5 +1,6 @@
 package com.example.instagram.Scenarios.main.post
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -8,20 +9,29 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.instagram.Adapter.CommentAdapter
 import com.example.instagram.Data.ImgData
 import com.example.instagram.R
+import com.example.instagram.Scenarios.chat.ChatActivity
 import com.example.instagram.Scenarios.main.HomeActivity
 
 class CommentActivity : AppCompatActivity() {
     lateinit var commentAdapter: CommentAdapter
     var cImg = ArrayList<ImgData>()
 
+    @SuppressLint("MissingInflatedId")
     override fun onStart() {
         super.onStart()
         setContentView(R.layout.activity_comment)
 
         var back : Button = findViewById(R.id.backNav)
+        var dm: Button = findViewById(R.id.send)
 
         back.setOnClickListener {
             var intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        dm.setOnClickListener {
+            var intent = Intent(this, ChatActivity::class.java)
             startActivity(intent)
             finish()
         }

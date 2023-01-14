@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instagram.Adapter.PostAdapter
 import com.example.instagram.R
-import com.example.instagram.Scenarios.main.post.PostActivity
+import com.example.instagram.Scenarios.main.post.PostRegisterActivity
 import com.example.instagram.Scenarios.chat.ChatActivity
 
 class HomeFragment : Fragment() {
@@ -30,7 +30,7 @@ class HomeFragment : Fragment() {
         val view: View = inflater!!.inflate(R.layout.fragment_home, container, false)
 
         view.findViewById<Button>(R.id.addPost).setOnClickListener {
-            val intent = Intent(activity, PostActivity::class.java)
+            val intent = Intent(activity, PostRegisterActivity::class.java)
             startActivity(intent)
         }
 

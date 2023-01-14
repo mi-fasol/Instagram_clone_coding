@@ -1,10 +1,11 @@
-package com.example.instagram
+package com.example.instagram.Adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.instagram.R
 
 class GridAdapter() :
     RecyclerView.Adapter<GridAdapter.ViewHolder>() {

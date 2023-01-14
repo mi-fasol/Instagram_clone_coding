@@ -1,4 +1,4 @@
-package com.example.instagram
+package com.example.instagram.Scenarios.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.instagram.Adapter.PostAdapter
+import com.example.instagram.R
+import com.example.instagram.Scenarios.main.post.PostActivity
+import com.example.instagram.Scenarios.chat.ChatActivity
 
 class HomeFragment : Fragment() {
     private var layoutManager: RecyclerView.LayoutManager? = null

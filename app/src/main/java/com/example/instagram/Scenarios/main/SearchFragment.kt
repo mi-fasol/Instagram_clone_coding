@@ -1,4 +1,4 @@
-package com.example.instagram
+package com.example.instagram.Scenarios.main
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import com.example.instagram.R
 
 class SearchFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,7 +1,9 @@
-package com.example.instagram
+package com.example.instagram.Scenarios.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.instagram.*
+import com.example.instagram.Scenarios.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 @Suppress("DEPRECATION")

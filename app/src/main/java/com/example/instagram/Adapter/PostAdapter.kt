@@ -1,15 +1,21 @@
 package com.example.instagram.Adapter
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instagram.R
+import com.example.instagram.Scenarios.main.HomeActivity
+import com.example.instagram.Scenarios.main.post.CommentActivity
+import org.w3c.dom.Comment
 
 
-class PostAdapter() :
+class PostAdapter(private var context: Context) :
     RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
     private val pId = arrayOf("mi_fasol", "pwfkvs341d", "iowcjvpxe_awev")
@@ -51,6 +57,10 @@ class PostAdapter() :
             userImage = itemView.findViewById(R.id.profileImage)
 
             itemView.setOnClickListener {
+                Intent(context, CommentActivity::class.java).apply {
+                }.run {
+                    context.startActivity(this)
+                }
             }
         }
     }

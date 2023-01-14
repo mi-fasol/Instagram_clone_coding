@@ -29,6 +29,7 @@
         <activity android:name=".Scenarios.main.post.PostRegisterActivity"></activity>
         <activity android:name=".Scenarios.chat.ChatActivity"></activity>
         <activity android:name=".Scenarios.main.NotificationActivity"></activity>
+        <activity android:name=".Scenarios.main.post.CommentActivity"></activity>
     </application>
 
 </manifest>

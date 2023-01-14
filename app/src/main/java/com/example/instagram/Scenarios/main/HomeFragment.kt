@@ -52,7 +52,7 @@ class HomeFragment : Fragment() {
         var rv = view.findViewById<RecyclerView>(R.id.rv_profile)
         rv.apply{
             layoutManager = LinearLayoutManager(activity)
-            adapter = PostAdapter()
+            adapter = PostAdapter(context)
         }
     }
 }

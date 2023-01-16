@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Instagram"
         tools:targetApi="31">
+
         <activity
             android:name=".Scenarios.intro.MainActivity"
             android:exported="true">
@@ -30,7 +31,8 @@
         <activity android:name=".Scenarios.chat.ChatActivity" />
         <activity android:name=".Scenarios.main.NotificationActivity" />
         <activity android:name=".Scenarios.main.post.CommentActivity" />
-        <activity android:name=".Scenarios.intro.SignInActivity"/>
+        <activity android:name=".Scenarios.intro.SignInActivity" />
+        <activity android:name=".Scenarios.intro.RegisterActivity"/>
     </application>
 
 </manifest>

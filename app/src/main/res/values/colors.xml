@@ -10,5 +10,7 @@
     <color name="lightGrey">#E6E6E6</color>
     <color name="profileEdit">#EEEEEE</color>
     <color name="profileBorder">#D6D6D6</color>
-
+    <color name="editText">#BE4189</color>
+    <color name="editHint">#DFABCE</color>
+    <color name="loginButton">#C24880</color>
 </resources>

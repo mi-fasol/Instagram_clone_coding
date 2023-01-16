@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.viewModels
 import com.example.instagram.R
 import com.example.instagram.Scenarios.main.HomeActivity
-import com.example.instagram.Viewmodel.SignViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -87,16 +85,14 @@ class SignInActivity : AppCompatActivity() {
         auth.signInWithCredential(credential).addOnCompleteListener(this) {
                 task ->
             if (task.isSuccessful){
-                toHomeActivity(auth.currentUser)
+                toRegisterActivity(auth.currentUser)
             }
         }
     }
 
-    private fun toHomeActivity(currentUser: FirebaseUser?) {
-        val intent = Intent(this, HomeActivity::class.java)
+    private fun toRegisterActivity(currentUser: FirebaseUser?) {
+        val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
         finish()
     }
-
-
 }

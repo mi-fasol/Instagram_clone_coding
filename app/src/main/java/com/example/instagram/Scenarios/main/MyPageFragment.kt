@@ -85,7 +85,7 @@ class MyPageFragment : Fragment() {
         startActivity(intent)
     }
 
-    fun deleteId(){
+    private fun deleteId(){
         FirebaseAuth.getInstance().currentUser!!.delete().addOnCanceledListener {
             if(FirebaseAuth.getInstance().currentUser!!.delete().isSuccessful){
                 val pref = UserSharedPreferences

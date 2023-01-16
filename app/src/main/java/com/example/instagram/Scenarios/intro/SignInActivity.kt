@@ -3,8 +3,10 @@ package com.example.instagram.Scenarios.intro
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
+import com.example.instagram.Data.UserSharedPreferences
 import com.example.instagram.R
 import com.example.instagram.Scenarios.main.HomeActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -21,7 +23,7 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var googleSignInClient: GoogleSignInClient
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val RC_SIGN_IN = 9001
-    private val SignInButton : SignInButton by lazy { findViewById(R.id.google_login) }
+    private val SignInButton: SignInButton by lazy { findViewById(R.id.google_login) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +43,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
 
-    private fun googleLogin(){
+    private fun googleLogin() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             // 빨간줄이지만 토큰 문제라 실행 가능
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -56,7 +58,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     // 구글 회원가입
-    private fun googleSignIn(){
+    private fun googleSignIn() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
@@ -65,29 +67,39 @@ class SignInActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == RC_SIGN_IN){
+        if (requestCode == RC_SIGN_IN) {
             var task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 var account = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account)
-            }
-            catch (e : ApiException){
+            } catch (e: ApiException) {
                 Toast.makeText(this, "구글 회원가입에 실패하였습니다: ${e.message}", Toast.LENGTH_SHORT).show()
             }
-        }
-        else{
+        } else {
             /*no-op*/
         }
     }
+
     // account 객체에서 id 토큰 가져온 후 Firebase 인증
-    private fun firebaseAuthWithGoogle(account : GoogleSignInAccount?){
+    private fun firebaseAuthWithGoogle(account: GoogleSignInAccount?) {
         val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
-        auth.signInWithCredential(credential).addOnCompleteListener(this) {
-                task ->
-            if (task.isSuccessful){
-                toRegisterActivity(auth.currentUser)
+        val pref = UserSharedPreferences
+
+        auth.signInWithCredential(credential).addOnCompleteListener(this) { task ->
+            if (task.isSuccessful) {
+                if(pref.getUserId(this, "id") != null) {
+                    toHomeActivity(auth.currentUser)
+                } else{
+                    toRegisterActivity(auth.currentUser)
+                }
             }
         }
+    }
+
+    private fun toHomeActivity(currentUser: FirebaseUser?) {
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun toRegisterActivity(currentUser: FirebaseUser?) {

@@ -41,8 +41,6 @@ class MainActivity : AppCompatActivity() {
                     // 로그인 완료
                     if(prefs.getUserNick(this@MainActivity, "nickname")!="") {
                         toHomeActivity(auth.currentUser)
-                    }else{
-                        toRegisterActivity(auth.currentUser)
                     }
                 }else{
                     // 로그인 안되어있을 때 회원가입 페이지로

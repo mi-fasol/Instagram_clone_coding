@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.example.instagram.Data.UserSharedPreferences
 import com.example.instagram.R
 import com.example.instagram.Scenarios.main.HomeActivity
 
@@ -23,6 +24,7 @@ class RegisterActivity : AppCompatActivity() {
         var userId = ""
         var userNick = ""
         var loginButton: Button = findViewById(R.id.registerComplete)
+        var userPref = UserSharedPreferences
 
         loginButton.isEnabled = false
 
@@ -56,6 +58,8 @@ class RegisterActivity : AppCompatActivity() {
         })
 
         loginButton.setOnClickListener {
+            userPref.setUserNick(this, "nickname", userNick)
+            userPref.setUserNick(this, "id", userId)
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
             finish()

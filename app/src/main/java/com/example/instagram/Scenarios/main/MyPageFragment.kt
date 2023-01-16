@@ -8,11 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instagram.Adapter.GridAdapter
 import com.example.instagram.Scenarios.intro.MainActivity
-import com.example.instagram.Adapter.PostAdapter
+import com.example.instagram.Data.UserSharedPreferences
 import com.example.instagram.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -23,8 +24,6 @@ import com.google.firebase.auth.FirebaseAuth
 class MyPageFragment : Fragment() {
     private var googleSignInClient: GoogleSignInClient? = null
     private var auth: FirebaseAuth? = null
-    private var layoutManager: RecyclerView.LayoutManager? = null
-    private var adapter: RecyclerView.Adapter<PostAdapter.ViewHolder>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,14 +44,17 @@ class MyPageFragment : Fragment() {
 
         val view: View = inflater!!.inflate(R.layout.fragment_my_page, container, false)
 
-
         view.findViewById<Button>(R.id.menu).setOnClickListener {
             val bottomSheet = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
             val bottomSheetView = BottomSheetDialog(requireContext())
             bottomSheetView.setContentView(bottomSheet)
             bottomSheetView.show()
-
         }
+
+        val pref = UserSharedPreferences
+
+        view.findViewById<TextView>(R.id.userId).text = pref.getUserNick(requireContext(), "id")
+        view.findViewById<TextView>(R.id.userNick).text = pref.getUserNick(requireContext(), "nickname")
 
         view.findViewById<Button>(R.id.editProfile).setOnClickListener{
             signOut()

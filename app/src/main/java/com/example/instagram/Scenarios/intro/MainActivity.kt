@@ -2,23 +2,18 @@ package com.example.instagram.Scenarios.intro
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.instagram.Data.UserSharedPreferences
 import com.example.instagram.R
 import com.example.instagram.Scenarios.main.HomeActivity
 import com.example.instagram.Viewmodel.SignViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.SignInButton
-import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
@@ -37,12 +32,18 @@ class MainActivity : AppCompatActivity() {
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
+        var prefs = UserSharedPreferences
+
         viewModel.tryLogin(this)
         lifecycleScope.launchWhenCreated {
             viewModel.loginResult.collect{ isLogin ->
                 if (isLogin){
                     // 로그인 완료
-                    toHomeActivity(auth.currentUser)
+                    if(prefs.getUserNick(this@MainActivity, "nickname")!="") {
+                        toHomeActivity(auth.currentUser)
+                    }else{
+                        toRegisterActivity(auth.currentUser)
+                    }
                 }else{
                     // 로그인 안되어있을 때 회원가입 페이지로
                     startActivity(Intent(this@MainActivity, SignInActivity::class.java))
@@ -52,6 +53,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun toHomeActivity(currentUser: FirebaseUser?) {
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun toRegisterActivity(currentUser: FirebaseUser?) {
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         finish()

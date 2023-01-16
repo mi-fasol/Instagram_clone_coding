@@ -22,6 +22,7 @@
                 android:layout_height="70dp">
 
                 <TextView
+                    android:id="@+id/userId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -167,6 +168,7 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/userNick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"

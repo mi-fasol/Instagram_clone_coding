@@ -31,10 +31,9 @@ object UserSharedPreferences {
         return pref.getString(key, "")
     }
 
-    fun removeUser(context: Context, key: String){
-        pref = context.getSharedPreferences("id", Activity.MODE_PRIVATE)
+    fun removeUser(context: Context){
         val editor = pref.edit()
         editor.clear()
-        editor.commit()
+        editor.apply()
     }
 }

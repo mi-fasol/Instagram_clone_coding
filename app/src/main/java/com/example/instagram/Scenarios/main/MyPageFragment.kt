@@ -53,20 +53,19 @@ class MyPageFragment : Fragment() {
                 signOut()
             }
             bottomSheet.findViewById<Button>(R.id.resign).setOnClickListener {
-                withdrawal()
+                deleteId()
             }
         }
 
         val pref = UserSharedPreferences
 
-        view.findViewById<TextView>(R.id.userId).text = pref.getUserNick(requireContext(), "id")
+        view.findViewById<TextView>(R.id.userId).text = pref.getUserId(requireContext(), "id")
         view.findViewById<TextView>(R.id.userNick).text = pref.getUserNick(requireContext(), "nickname")
 
         view.findViewById<Button>(R.id.editProfile).setOnClickListener{
             signOut()
         }
 
-        // Return the fragment view/layout
         return view
     }
 
@@ -86,10 +85,13 @@ class MyPageFragment : Fragment() {
         startActivity(intent)
     }
 
-    private fun withdrawal(){
-        val pref = UserSharedPreferences
-        FirebaseAuth.getInstance().currentUser?.delete()
-        signOut()
-        pref.removeUser(requireContext(), "id")
+    fun deleteId(){
+        FirebaseAuth.getInstance().currentUser!!.delete().addOnCanceledListener {
+            if(FirebaseAuth.getInstance().currentUser!!.delete().isSuccessful){
+                val pref = UserSharedPreferences
+                pref.removeUser(requireContext())
+                signOut()
+            }
+        }
     }
 }

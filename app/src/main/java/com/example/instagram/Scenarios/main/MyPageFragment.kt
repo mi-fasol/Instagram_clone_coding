@@ -49,6 +49,9 @@ class MyPageFragment : Fragment() {
             val bottomSheetView = BottomSheetDialog(requireContext())
             bottomSheetView.setContentView(bottomSheet)
             bottomSheetView.show()
+            bottomSheet.findViewById<Button>(R.id.signOutBtn).setOnClickListener {
+                signOut()
+            }
         }
 
         val pref = UserSharedPreferences

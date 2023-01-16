@@ -59,7 +59,7 @@ class RegisterActivity : AppCompatActivity() {
 
         loginButton.setOnClickListener {
             userPref.setUserNick(this, "nickname", userNick)
-            userPref.setUserNick(this, "id", userId)
+            userPref.setUserId(this, "id", userId)
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
             finish()

@@ -52,6 +52,9 @@ class MyPageFragment : Fragment() {
             bottomSheet.findViewById<Button>(R.id.signOutBtn).setOnClickListener {
                 signOut()
             }
+            bottomSheet.findViewById<Button>(R.id.resign).setOnClickListener {
+                withdrawal()
+            }
         }
 
         val pref = UserSharedPreferences
@@ -81,5 +84,12 @@ class MyPageFragment : Fragment() {
         googleSignInClient?.signOut()
         val intent = Intent(requireActivity(), MainActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun withdrawal(){
+        val pref = UserSharedPreferences
+        FirebaseAuth.getInstance().currentUser?.delete()
+        signOut()
+        pref.removeUser(requireContext(), "id")
     }
 }

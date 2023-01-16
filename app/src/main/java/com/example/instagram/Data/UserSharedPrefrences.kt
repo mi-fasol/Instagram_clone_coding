@@ -31,15 +31,10 @@ object UserSharedPreferences {
         return pref.getString(key, "")
     }
 
-    fun setString(context: Context, key: String, value: String) {
-        pref = context.getSharedPreferences("SummonerID", Activity.MODE_PRIVATE)
+    fun removeUser(context: Context, key: String){
+        pref = context.getSharedPreferences("id", Activity.MODE_PRIVATE)
         val editor = pref.edit()
-        editor.putString(key, value)
-        editor.apply()
-    }
-
-    fun getString(context: Context, key: String) : String? {
-        pref = context.getSharedPreferences("SummonerID", Activity.MODE_PRIVATE)
-        return pref.getString(key, "NoID")
+        editor.clear()
+        editor.commit()
     }
 }

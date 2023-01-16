@@ -25,11 +25,12 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".Scenarios.main.HomeActivity"></activity>
-        <activity android:name=".Scenarios.main.post.PostRegisterActivity"></activity>
-        <activity android:name=".Scenarios.chat.ChatActivity"></activity>
-        <activity android:name=".Scenarios.main.NotificationActivity"></activity>
-        <activity android:name=".Scenarios.main.post.CommentActivity"></activity>
+        <activity android:name=".Scenarios.main.HomeActivity" />
+        <activity android:name=".Scenarios.main.post.PostRegisterActivity" />
+        <activity android:name=".Scenarios.chat.ChatActivity" />
+        <activity android:name=".Scenarios.main.NotificationActivity" />
+        <activity android:name=".Scenarios.main.post.CommentActivity" />
+        <activity android:name=".Scenarios.intro.SignInActivity"/>
     </application>
 
 </manifest>

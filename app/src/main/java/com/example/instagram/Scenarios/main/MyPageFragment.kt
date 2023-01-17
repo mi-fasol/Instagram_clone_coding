@@ -19,6 +19,7 @@ import com.example.instagram.Data.UserSharedPreferences
 import com.example.instagram.R
 import com.example.instagram.Scenarios.intro.MainActivity
 import com.example.instagram.Scenarios.intro.RegisterActivity
+import com.example.instagram.Scenarios.main.post.PostRegisterActivity
 import com.example.instagram.Viewmodel.SignViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -27,8 +28,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseAuth
 
 class MyPageFragment : Fragment() {
-    private var googleSignInClient: GoogleSignInClient? = null
-    lateinit var auth: FirebaseAuth
     lateinit var viewModel: SignViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +49,10 @@ class MyPageFragment : Fragment() {
 
         val view: View = inflater!!.inflate(R.layout.fragment_my_page, container, false)
 
+        view.findViewById<Button>(R.id.addPost).setOnClickListener {
+            startActivity(Intent(requireContext(), PostRegisterActivity::class.java))
+        }
+
         view.findViewById<Button>(R.id.menu).setOnClickListener {
             val bottomSheet = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
             val bottomSheetView = BottomSheetDialog(requireContext())
@@ -70,7 +73,7 @@ class MyPageFragment : Fragment() {
             pref.getUserNick(requireContext())
 
         view.findViewById<Button>(R.id.editProfile).setOnClickListener {
-            startActivity(Intent(requireContext(), RegisterActivity::class.java))
+            startActivity(Intent(requireContext(), ProfileEditActivity::class.java))
         }
 
         return view

@@ -1,0 +1,71 @@
+package com.example.instagram.Scenarios.main
+
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.Button
+import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
+import com.example.instagram.Data.UserSharedPreferences
+import com.example.instagram.R
+import com.example.instagram.Scenarios.intro.SignInActivity
+
+class ProfileEditActivity : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_profile_edit)
+
+        var editId: EditText = findViewById(R.id.registerId)
+        var editNick: EditText = findViewById(R.id.registerNick)
+        var backTo: Button = findViewById(R.id.toSign)
+
+        var userId = ""
+        var userNick = ""
+        var loginButton: Button = findViewById(R.id.registerComplete)
+        var userPref = UserSharedPreferences
+
+        loginButton.isEnabled = false
+
+        editId.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                userId = editId.text.toString()
+                loginButton.isEnabled = userId != "" && userNick != ""
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+        })
+
+        editNick.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                userNick = editNick.text.toString()
+                loginButton.isEnabled = userId != "" && userNick != ""
+            }
+
+            override fun afterTextChanged(p0: Editable?) {}
+        })
+
+        if (loginButton.isEnabled)
+            loginButton.setOnClickListener {
+                userPref.setUserNick(this, userNick)
+                userPref.setUserId(this, userId)
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+                finish()
+
+            }
+
+        backTo.setOnClickListener {
+            this.finish()
+        }
+    }
+}

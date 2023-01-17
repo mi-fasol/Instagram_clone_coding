@@ -9,24 +9,27 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instagram.Adapter.GridAdapter
 import com.example.instagram.Data.UserSharedPreferences
 import com.example.instagram.R
 import com.example.instagram.Scenarios.intro.MainActivity
+import com.example.instagram.Scenarios.intro.RegisterActivity
+import com.example.instagram.Viewmodel.SignViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class MyPageFragment : Fragment() {
     private var googleSignInClient: GoogleSignInClient? = null
     lateinit var auth: FirebaseAuth
+    lateinit var viewModel: SignViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +46,7 @@ class MyPageFragment : Fragment() {
             .requestEmail()
             .build()
 
-        googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+        viewModel = ViewModelProvider(this).get(SignViewModel::class.java)
 
         val view: View = inflater!!.inflate(R.layout.fragment_my_page, container, false)
 
@@ -53,10 +56,10 @@ class MyPageFragment : Fragment() {
             bottomSheetView.setContentView(bottomSheet)
             bottomSheetView.show()
             bottomSheet.findViewById<Button>(R.id.signOutBtn).setOnClickListener {
-                signOut()
+                viewModel.signOut(requireContext(), requireActivity(), gso)
             }
             bottomSheet.findViewById<Button>(R.id.resign).setOnClickListener {
-                deleteId()
+                viewModel.deleteId(requireContext(), requireActivity(), gso)
             }
         }
 
@@ -67,7 +70,7 @@ class MyPageFragment : Fragment() {
             pref.getUserNick(requireContext())
 
         view.findViewById<Button>(R.id.editProfile).setOnClickListener {
-            signOut()
+            startActivity(Intent(requireContext(), RegisterActivity::class.java))
         }
 
         return view
@@ -79,27 +82,6 @@ class MyPageFragment : Fragment() {
         gv.apply {
             layoutManager = GridLayoutManager(activity, 3)
             adapter = GridAdapter()
-        }
-    }
-
-    private fun signOut() {
-        auth = FirebaseAuth.getInstance()
-        auth.signOut()
-        googleSignInClient?.signOut()
-        val intent = Intent(requireActivity(), MainActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun deleteId() {
-        auth = FirebaseAuth.getInstance()
-        auth.currentUser?.delete()?.addOnCompleteListener() {
-            if (it.isSuccessful) {
-                val pref = UserSharedPreferences
-                pref.removeUser(requireContext())
-                signOut()
-            } else{
-                Toast.makeText(context, "실패했습니다.", Toast.LENGTH_SHORT).show()
-            }
         }
     }
 }

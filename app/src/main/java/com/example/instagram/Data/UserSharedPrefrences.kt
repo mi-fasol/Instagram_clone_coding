@@ -3,6 +3,7 @@ package com.example.instagram.Data
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 
 object UserSharedPreferences {
     private lateinit var pref: SharedPreferences
@@ -35,5 +36,6 @@ object UserSharedPreferences {
         val editor = pref.edit()
         editor.clear()
         editor.apply()
+        Log.d("clear", getUserId(context, "id").toString())
     }
 }

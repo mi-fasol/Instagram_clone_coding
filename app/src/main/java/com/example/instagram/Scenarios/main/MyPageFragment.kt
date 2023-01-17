@@ -3,27 +3,30 @@ package com.example.instagram.Scenarios.main
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instagram.Adapter.GridAdapter
-import com.example.instagram.Scenarios.intro.MainActivity
 import com.example.instagram.Data.UserSharedPreferences
 import com.example.instagram.R
+import com.example.instagram.Scenarios.intro.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MyPageFragment : Fragment() {
     private var googleSignInClient: GoogleSignInClient? = null
-    private var auth: FirebaseAuth? = null
+    lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,9 +63,10 @@ class MyPageFragment : Fragment() {
         val pref = UserSharedPreferences
 
         view.findViewById<TextView>(R.id.userId).text = pref.getUserId(requireContext(), "id")
-        view.findViewById<TextView>(R.id.userNick).text = pref.getUserNick(requireContext(), "nickname")
+        view.findViewById<TextView>(R.id.userNick).text =
+            pref.getUserNick(requireContext(), "nickname")
 
-        view.findViewById<Button>(R.id.editProfile).setOnClickListener{
+        view.findViewById<Button>(R.id.editProfile).setOnClickListener {
             signOut()
         }
 
@@ -72,25 +76,28 @@ class MyPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var gv = view.findViewById<RecyclerView>(R.id.gv_myPage)
-        gv.apply{
+        gv.apply {
             layoutManager = GridLayoutManager(activity, 3)
             adapter = GridAdapter()
         }
     }
 
     private fun signOut() {
-        auth?.signOut()
+        auth.signOut()
         googleSignInClient?.signOut()
         val intent = Intent(requireActivity(), MainActivity::class.java)
         startActivity(intent)
     }
 
-    private fun deleteId(){
-        FirebaseAuth.getInstance().currentUser!!.delete().addOnCanceledListener {
-            if(FirebaseAuth.getInstance().currentUser!!.delete().isSuccessful){
+    private fun deleteId() {
+        auth = FirebaseAuth.getInstance()
+        auth.currentUser?.delete()?.addOnCompleteListener() {
+            if (it.isSuccessful) {
                 val pref = UserSharedPreferences
                 pref.removeUser(requireContext())
                 signOut()
+            } else{
+                Toast.makeText(context, "실패했습니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }

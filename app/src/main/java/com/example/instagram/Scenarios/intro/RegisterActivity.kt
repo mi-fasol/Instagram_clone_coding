@@ -53,15 +53,15 @@ class RegisterActivity : AppCompatActivity() {
             override fun afterTextChanged(p0: Editable?) {}
         })
 
-        if(userId == "")
+        if (userId == "")
 
-        loginButton.setOnClickListener {
-            userPref.setUserNick(this, userNick)
-            userPref.setUserId(this, userId)
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
-            finish()
+            loginButton.setOnClickListener {
+                userPref.setUserNick(this, userNick)
+                userPref.setUserId(this, userId)
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+                finish()
 
-        }
+            }
     }
 }

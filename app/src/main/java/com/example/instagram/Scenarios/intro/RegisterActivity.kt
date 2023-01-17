@@ -34,9 +34,7 @@ class RegisterActivity : AppCompatActivity() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 userId = editId.text.toString()
-                if (userId != "" && userNick != "") {
-                    loginButton.isEnabled = true
-                }
+                loginButton.isEnabled = userId != "" && userNick != ""
             }
 
             override fun afterTextChanged(p0: Editable?) {
@@ -49,13 +47,13 @@ class RegisterActivity : AppCompatActivity() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 userNick = editNick.text.toString()
-                if (userId != "" && userNick != "") {
-                    loginButton.isEnabled = true
-                }
+                loginButton.isEnabled = userId != "" && userNick != ""
             }
 
             override fun afterTextChanged(p0: Editable?) {}
         })
+
+        if(userId == "")
 
         loginButton.setOnClickListener {
             userPref.setUserNick(this, userNick)

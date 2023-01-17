@@ -8,8 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,15 +15,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.instagram.Adapter.GridAdapter
 import com.example.instagram.Data.UserSharedPreferences
 import com.example.instagram.R
-import com.example.instagram.Scenarios.intro.MainActivity
 import com.example.instagram.Scenarios.intro.RegisterActivity
 import com.example.instagram.Scenarios.main.post.PostRegisterActivity
 import com.example.instagram.Viewmodel.SignViewModel
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.firebase.auth.FirebaseAuth
 
 class MyPageFragment : Fragment() {
     lateinit var viewModel: SignViewModel
@@ -38,7 +32,7 @@ class MyPageFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -47,7 +41,7 @@ class MyPageFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(SignViewModel::class.java)
 
-        val view: View = inflater!!.inflate(R.layout.fragment_my_page, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_my_page, container, false)
 
         view.findViewById<Button>(R.id.addPost).setOnClickListener {
             startActivity(Intent(requireContext(), PostRegisterActivity::class.java))
@@ -63,6 +57,10 @@ class MyPageFragment : Fragment() {
             }
             bottomSheet.findViewById<Button>(R.id.resign).setOnClickListener {
                 viewModel.deleteId(requireContext(), requireActivity(), gso)
+                activity?.supportFragmentManager
+                    ?.beginTransaction()
+                    ?.remove(this)
+                    ?.commit()
             }
         }
 
@@ -73,7 +71,7 @@ class MyPageFragment : Fragment() {
             pref.getUserNick(requireContext())
 
         view.findViewById<Button>(R.id.editProfile).setOnClickListener {
-            startActivity(Intent(requireContext(), ProfileEditActivity::class.java))
+            startActivity(Intent(requireContext(), RegisterActivity::class.java))
         }
 
         return view
@@ -81,7 +79,7 @@ class MyPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var gv = view.findViewById<RecyclerView>(R.id.gv_myPage)
+        val gv = view.findViewById<RecyclerView>(R.id.gv_myPage)
         gv.apply {
             layoutManager = GridLayoutManager(activity, 3)
             adapter = GridAdapter()

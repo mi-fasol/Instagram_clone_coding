@@ -87,9 +87,9 @@ class SignInActivity : AppCompatActivity() {
 
         auth.signInWithCredential(credential).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
-                if(pref.getUserId(this, "id") != null) {
+                if (pref.getUserNick(this) != "") {
                     toHomeActivity(auth.currentUser)
-                } else{
+                } else {
                     toRegisterActivity(auth.currentUser)
                 }
             }

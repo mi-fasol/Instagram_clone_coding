@@ -30,7 +30,7 @@ class ChatActivity : AppCompatActivity() {
         var id: TextView = findViewById(R.id.nickname)
 
         var pref = UserSharedPreferences
-        id.text = pref.getUserId(this, "id")
+        id.text = pref.getUserId(this)
 
         back.setOnClickListener {
             var intent = Intent(this, HomeActivity::class.java)

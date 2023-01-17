@@ -62,9 +62,9 @@ class MyPageFragment : Fragment() {
 
         val pref = UserSharedPreferences
 
-        view.findViewById<TextView>(R.id.userId).text = pref.getUserId(requireContext(), "id")
+        view.findViewById<TextView>(R.id.userId).text = pref.getUserId(requireContext())
         view.findViewById<TextView>(R.id.userNick).text =
-            pref.getUserNick(requireContext(), "nickname")
+            pref.getUserNick(requireContext())
 
         view.findViewById<Button>(R.id.editProfile).setOnClickListener {
             signOut()
@@ -83,6 +83,7 @@ class MyPageFragment : Fragment() {
     }
 
     private fun signOut() {
+        auth = FirebaseAuth.getInstance()
         auth.signOut()
         googleSignInClient?.signOut()
         val intent = Intent(requireActivity(), MainActivity::class.java)

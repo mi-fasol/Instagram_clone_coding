@@ -7,35 +7,36 @@ import android.util.Log
 
 object UserSharedPreferences {
     private lateinit var pref: SharedPreferences
+    private var userPref : String = "userPref"
 
-    fun setUserNick(context: Context, key: String, value: String){
-        pref = context.getSharedPreferences("nickname", Activity.MODE_PRIVATE)
+    fun setUserNick(context: Context, value: String){
+        pref = context.getSharedPreferences(userPref, Activity.MODE_PRIVATE)
         val editor = pref.edit()
-        editor.putString(key, value)
+        editor.putString("nickname", value)
         editor.apply()
     }
 
-    fun getUserNick(context: Context, key: String): String?{
-        pref = context.getSharedPreferences("nickname", Activity.MODE_PRIVATE)
-        return pref.getString(key, "")
+    fun getUserNick(context: Context): String{
+        pref = context.getSharedPreferences(userPref, Activity.MODE_PRIVATE)
+        return pref.getString("nickname", "").toString()
     }
 
-    fun setUserId(context: Context, key: String, value: String){
-        pref = context.getSharedPreferences("id", Activity.MODE_PRIVATE)
+    fun setUserId(context: Context, value: String){
+        pref = context.getSharedPreferences(userPref, Activity.MODE_PRIVATE)
         val editor = pref.edit()
-        editor.putString(key, value)
+        editor.putString("id", value)
         editor.apply()
     }
 
-    fun getUserId(context: Context, key: String): String?{
-        pref = context.getSharedPreferences("id", Activity.MODE_PRIVATE)
-        return pref.getString(key, "")
+    fun getUserId(context: Context): String {
+        pref = context.getSharedPreferences(userPref, Activity.MODE_PRIVATE)
+        return pref.getString("id", "").toString()
     }
 
     fun removeUser(context: Context){
+        pref = context.getSharedPreferences(userPref, Activity.MODE_PRIVATE)
         val editor = pref.edit()
         editor.clear()
         editor.apply()
-        Log.d("clear", getUserId(context, "id").toString())
     }
 }

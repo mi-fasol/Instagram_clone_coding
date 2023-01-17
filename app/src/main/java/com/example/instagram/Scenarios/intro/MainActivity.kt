@@ -2,6 +2,7 @@ package com.example.instagram.Scenarios.intro
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -36,13 +37,16 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.tryLogin(this)
         lifecycleScope.launchWhenCreated {
-            viewModel.loginResult.collect{ isLogin ->
-                if (isLogin){
-                    // 로그인 완료
-                    if(prefs.getUserNick(this@MainActivity, "nickname")!="") {
-                        toHomeActivity(auth.currentUser)
-                    }
-                }else{
+            viewModel.loginResult.collect { isLogin ->
+                if (isLogin && prefs.getUserNick(this@MainActivity) != "" && prefs.getUserId(this@MainActivity) != "") {
+                    toHomeActivity(auth.currentUser)
+                    Log.d("shared", prefs.getUserNick(this@MainActivity).toString())
+                } else if (isLogin && (prefs.getUserNick(this@MainActivity) == "" || prefs.getUserId(
+                        this@MainActivity
+                    ) == "")
+                ) {
+                    toRegisterActivity(auth.currentUser)
+                } else {
                     // 로그인 안되어있을 때 회원가입 페이지로
                     startActivity(Intent(this@MainActivity, SignInActivity::class.java))
                 }
@@ -57,7 +61,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun toRegisterActivity(currentUser: FirebaseUser?) {
-        val intent = Intent(this, HomeActivity::class.java)
+        val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
         finish()
     }

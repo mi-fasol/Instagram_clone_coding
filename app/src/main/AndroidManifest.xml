@@ -33,6 +33,7 @@
         <activity android:name=".Scenarios.main.post.CommentActivity" />
         <activity android:name=".Scenarios.intro.SignInActivity" />
         <activity android:name=".Scenarios.intro.RegisterActivity"/>
+        <activity android:name=".Scenarios.main.ProfileEditActivity"/>
     </application>
 
 </manifest>

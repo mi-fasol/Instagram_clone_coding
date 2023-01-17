@@ -33,9 +33,7 @@ class ChatActivity : AppCompatActivity() {
         id.text = pref.getUserId(this)
 
         back.setOnClickListener {
-            var intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
-            finish()
+            this.finish()
         }
 
         addPost.setOnClickListener {

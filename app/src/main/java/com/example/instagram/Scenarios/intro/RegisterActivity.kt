@@ -20,6 +20,7 @@ class RegisterActivity : AppCompatActivity() {
 
         var editId: EditText = findViewById(R.id.registerId)
         var editNick: EditText = findViewById(R.id.registerNick)
+        var backTo: Button = findViewById(R.id.toSign)
 
         var userId = ""
         var userNick = ""
@@ -53,8 +54,7 @@ class RegisterActivity : AppCompatActivity() {
             override fun afterTextChanged(p0: Editable?) {}
         })
 
-        if (userId == "")
-
+        if (loginButton.isEnabled)
             loginButton.setOnClickListener {
                 userPref.setUserNick(this, userNick)
                 userPref.setUserId(this, userId)
@@ -63,5 +63,11 @@ class RegisterActivity : AppCompatActivity() {
                 finish()
 
             }
+
+        backTo.setOnClickListener {
+            val intent = Intent(this, SignInActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 }

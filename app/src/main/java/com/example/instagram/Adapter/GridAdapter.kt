@@ -9,8 +9,10 @@ import com.example.instagram.R
 
 class GridAdapter() :
     RecyclerView.Adapter<GridAdapter.ViewHolder>() {
+    val itemNum : Int = 8
+
     override fun getItemCount(): Int {
-        return 8
+        return itemNum
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -22,7 +24,7 @@ class GridAdapter() :
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var postImage: ImageView
+        private var postImage: ImageView
 
         init {
             postImage = itemView.findViewById(R.id.myPagePost)

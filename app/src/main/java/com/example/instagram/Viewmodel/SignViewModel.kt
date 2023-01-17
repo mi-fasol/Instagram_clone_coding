@@ -19,8 +19,6 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 
 class SignViewModel : ViewModel() {
-    private var googleSignInClient: GoogleSignInClient? = null
-    lateinit var auth: FirebaseAuth
     private val _loginResult = MutableSharedFlow<Boolean>()
     var loginResult = _loginResult.asSharedFlow()
 
@@ -43,28 +41,6 @@ class SignViewModel : ViewModel() {
     private fun setLoginResult(isLogin: Boolean) {
         viewModelScope.launch {
             _loginResult.emit(isLogin)
-        }
-    }
-
-    fun signOut(context: Context, acitivity: Activity, gso: GoogleSignInOptions) {
-        googleSignInClient = GoogleSignIn.getClient(acitivity, gso)
-        auth = FirebaseAuth.getInstance()
-        auth.signOut()
-        googleSignInClient?.signOut()
-        var intent = Intent(context, MainActivity::class.java)
-        context?.startActivity(intent)
-    }
-
-    fun deleteId(context: Context, acitivity: Activity, gso: GoogleSignInOptions) {
-        auth = FirebaseAuth.getInstance()
-        auth.currentUser?.delete()?.addOnCompleteListener() {
-            if (it.isSuccessful) {
-                val pref = UserSharedPreferences
-                pref.removeUser(context)
-                signOut(context, acitivity, gso)
-            } else {
-                Toast.makeText(context, "실패했습니다.", Toast.LENGTH_SHORT).show()
-            }
         }
     }
 }

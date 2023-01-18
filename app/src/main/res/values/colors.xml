@@ -14,4 +14,5 @@
     <color name="editHint">#DFABCE</color>
     <color name="loginButton">#C24880</color>
     <color name="shareButton">#1C96EE</color>
+    <color name="nickname">#656565</color>
 </resources>

@@ -64,4 +64,10 @@ object UserSharedPreferences {
         editor.clear()
         editor.apply()
     }
+
+    fun removePost(context: Context){
+        pref = context.getSharedPreferences(postPref, Activity.MODE_PRIVATE)
+        val editor = pref.edit()
+        editor.remove("")
+    }
 }

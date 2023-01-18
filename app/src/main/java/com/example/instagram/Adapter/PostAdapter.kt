@@ -117,7 +117,8 @@ class PostAdapter(private var context: Context) :
                 showPopUp.setOnMenuItemClickListener { menuItem ->
                     val id = menuItem.itemId
                     if (id == 0) {
-                        Intent(context, CommentActivity::class.java).apply {
+                        pref.removePost(context)
+                        Intent(context, HomeActivity::class.java).apply {
                         }.run {
                             context.startActivity(this)
                         }

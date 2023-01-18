@@ -23,7 +23,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/profile_image"
+            android:src="@drawable/dog"
             app:civ_border_color="@color/profileBorder"
             app:civ_border_overlay="true"
             app:civ_border_width="2dp" />
@@ -35,7 +35,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/profileImage"
-            android:text="mi_fasol"
+            android:text="d234_304bxz"
             android:textColor="@color/black"
             android:textSize="15dp"
             android:textStyle="bold" />
@@ -112,7 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:clickable="true"
-            android:text="mi_fasol"
+            android:text="d234_304bxz"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:focusable="true" />
@@ -123,7 +123,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:clickable="true"
-            android:text="남자칭구가 목도리를 사줘따. 따뜻해따."
+            android:text="고양이 귀여워"
             android:textColor="@color/black"
             android:focusable="true" />
     </LinearLayout>
@@ -154,7 +154,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="10dp"
             android:clickable="true"
-            android:text="그 남찡구가 나다."
+            android:text="깜찍해!"
             android:textColor="@color/black"
             android:focusable="true" />
     </LinearLayout>

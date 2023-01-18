@@ -1,23 +1,26 @@
 package com.example.instagram.Scenarios.main
 
 import android.content.Intent
+import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.esafirm.imagepicker.features.*
 import com.example.instagram.Adapter.PostAdapter
+import com.example.instagram.Data.UserSharedPreferences
 import com.example.instagram.R
 import com.example.instagram.Scenarios.main.post.PostRegisterActivity
 import com.example.instagram.Scenarios.chat.ChatActivity
 
 class HomeFragment : Fragment() {
-    private var layoutManager: RecyclerView.LayoutManager? = null
-    private var adapter: RecyclerView.Adapter<PostAdapter.ViewHolder>? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -26,7 +29,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view: View = inflater.inflate(R.layout.fragment_home, container, false)
 
         view.findViewById<Button>(R.id.addPost).setOnClickListener {
@@ -49,10 +52,14 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var rv = view.findViewById<RecyclerView>(R.id.rv_profile)
-        rv.apply{
+        val rv = view.findViewById<RecyclerView>(R.id.rv_profile)
+        val pref = UserSharedPreferences
+        rv.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = PostAdapter(context)
+        }
+        if (pref.getPostUserId(requireContext()) == null) {
+
         }
     }
 }

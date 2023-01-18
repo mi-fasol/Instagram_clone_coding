@@ -2,19 +2,17 @@ package com.example.instagram.Adapter
 
 import android.content.Context
 import android.content.Intent
-import android.text.Layout
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instagram.Data.UserSharedPreferences
 import com.example.instagram.R
 import com.example.instagram.Scenarios.main.HomeActivity
 import com.example.instagram.Scenarios.main.post.CommentActivity
-import org.w3c.dom.Comment
 
 
 class PostAdapter(private var context: Context) :
@@ -32,15 +30,16 @@ class PostAdapter(private var context: Context) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        if (holder.pUserId.text != pref.getUserId(context)) {
+            Log.d("post", "달라서 바꿉니다용")
+            pId[0] = pref.getUserId(context)
+            content[0] = pref.getUserPost(context)
+        }
         holder.postId.text = pId[position]
         holder.commentId.text = cId[position]
         holder.comment.text = comment[position]
         holder.postContent.text = content[position]
-        holder.pUserId.text = pref.getPostUserId(context)
-        if (holder.pUserId.text != pref.getUserId(context)) {
-            holder.pUserId.text = pref.getUserId(context)
-            holder.postId.text = pref.getUserId(context)
-        }
+        holder.pUserId.text = pId[position]
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -64,7 +63,7 @@ class PostAdapter(private var context: Context) :
         val menu: Button
 
         init {
-            pUserId = itemView.findViewById(R.id.pUserId)
+            pUserId = itemView.findViewById(R.id.postUserId)
             postId = itemView.findViewById(R.id.postNickname)
             postContent = itemView.findViewById(R.id.postContent)
             commentId = itemView.findViewById(R.id.cNickname)

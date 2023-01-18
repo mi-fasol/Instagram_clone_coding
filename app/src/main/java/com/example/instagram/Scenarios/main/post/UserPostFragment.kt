@@ -1,7 +1,6 @@
 package com.example.instagram.Scenarios.main.post
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +30,7 @@ class UserPostFragment : Fragment() {
 
         view.findViewById<Button>(R.id.backToMyPage).setOnClickListener {
             activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.fl_container, MyPageFragment())?.addToBackStack(null)?.commit()
+                ?.replace(R.id.fragment_container, MyPageFragment())?.addToBackStack(null)?.commit()
         }
 
         return view

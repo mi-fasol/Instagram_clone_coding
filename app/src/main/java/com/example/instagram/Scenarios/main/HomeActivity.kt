@@ -46,6 +46,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     fun onFragmentChange(frag: Fragment) {
-        supportFragmentManager.beginTransaction().replace(R.id.fl_container, frag).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, frag).commit()
     }
 }

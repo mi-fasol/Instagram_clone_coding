@@ -21,14 +21,12 @@ class GridAdapter(private var context: Context) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemView.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                val activity = v!!.context as AppCompatActivity
-                val userPostFragment = UserPostFragment()
-                activity.supportFragmentManager.beginTransaction()
-                    .replace(R.id.fl_container, userPostFragment).addToBackStack(null).commit()
-            }
-        })
+        holder.itemView.setOnClickListener { v ->
+            val activity = v!!.context as AppCompatActivity
+            val userPostFragment = UserPostFragment()
+            activity.supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, userPostFragment).commit()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

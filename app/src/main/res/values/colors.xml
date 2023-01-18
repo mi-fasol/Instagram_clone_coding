@@ -7,10 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="lightGrey">#E6E6E6</color>
+    <color name="lightGrey">#D4D4D4</color>
     <color name="profileEdit">#EEEEEE</color>
     <color name="profileBorder">#D6D6D6</color>
     <color name="editText">#BE4189</color>
     <color name="editHint">#DFABCE</color>
     <color name="loginButton">#C24880</color>
+    <color name="shareButton">#1C96EE</color>
 </resources>

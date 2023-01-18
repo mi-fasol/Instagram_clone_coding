@@ -65,12 +65,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
-            android:maxLines="4"
             android:layout_marginBottom="15dp"
             android:background="@android:color/transparent"
-            android:textSize="13sp"
-            android:hint="문구 입력..." />
-
+            android:hint="문구 입력..."
+            android:maxLines="4"
+            android:textSize="13sp" />
     </LinearLayout>
 
     <View
@@ -115,6 +114,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/lightGrey" />
+
     <Button
         android:id="@+id/addMusic"
         style="@style/TextButton"

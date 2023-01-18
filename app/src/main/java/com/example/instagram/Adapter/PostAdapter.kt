@@ -4,11 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.text.Layout
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instagram.Data.UserSharedPreferences
@@ -38,14 +37,15 @@ class PostAdapter(private var context: Context) :
         holder.comment.text = comment[position]
         holder.postContent.text = content[position]
         holder.pUserId.text = pref.getPostUserId(context)
-        if(holder.pUserId.text != pref.getUserId(context)){
+        if (holder.pUserId.text != pref.getUserId(context)) {
             holder.pUserId.text = pref.getUserId(context)
             holder.postId.text = pref.getUserId(context)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.post_item_recycler, parent, false)
+        val v =
+            LayoutInflater.from(parent.context).inflate(R.layout.post_item_recycler, parent, false)
         return ViewHolder(v)
     }
 
@@ -57,10 +57,11 @@ class PostAdapter(private var context: Context) :
         var comment: TextView
         var postImage: ImageView
         var userImage: ImageView
-        var pUserId : TextView
-        var postLayout : LinearLayout
-        var commentLayout : LinearLayout
-        var heart : TextView
+        var pUserId: TextView
+        var postLayout: LinearLayout
+        var commentLayout: LinearLayout
+        var heart: TextView
+        val menu: Button
 
         init {
             pUserId = itemView.findViewById(R.id.pUserId)
@@ -73,8 +74,15 @@ class PostAdapter(private var context: Context) :
             postLayout = itemView.findViewById(R.id.postLayout)
             commentLayout = itemView.findViewById(R.id.commentLayout)
             heart = itemView.findViewById(R.id.getHeart)
+            menu = itemView.findViewById(R.id.postMenu)
 
+            val showPopUp = PopupMenu(
+                context, menu
+            )
+
+            showPopUp.menu.add(Menu.NONE, 0, 0, "게시물 삭제")
             itemView.setOnClickListener {
+
                 postId.setOnClickListener {
                     Intent(context, CommentActivity::class.java).apply {
                     }.run {
@@ -104,6 +112,21 @@ class PostAdapter(private var context: Context) :
                     }.run {
                         context.startActivity(this)
                     }
+                }
+
+                showPopUp.setOnMenuItemClickListener { menuItem ->
+                    val id = menuItem.itemId
+                    if (id == 0) {
+                        Intent(context, CommentActivity::class.java).apply {
+                        }.run {
+                            context.startActivity(this)
+                        }
+                    }
+                    false
+                }
+
+                menu.setOnClickListener {
+                    showPopUp.show()
                 }
             }
         }

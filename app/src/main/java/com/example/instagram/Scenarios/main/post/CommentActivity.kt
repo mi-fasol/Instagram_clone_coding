@@ -13,11 +13,10 @@ import com.example.instagram.Data.UserSharedPreferences
 import com.example.instagram.R
 import com.example.instagram.Scenarios.chat.ChatActivity
 import com.example.instagram.Scenarios.main.HomeActivity
-import org.w3c.dom.Text
 
 class CommentActivity : AppCompatActivity() {
     lateinit var commentAdapter: CommentAdapter
-    var cImg = ArrayList<ImgData>()
+    private var cImg = ArrayList<ImgData>()
 
     @SuppressLint("MissingInflatedId")
     override fun onStart() {

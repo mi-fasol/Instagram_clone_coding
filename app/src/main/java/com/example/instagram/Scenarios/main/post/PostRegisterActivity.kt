@@ -1,9 +1,11 @@
 package com.example.instagram.Scenarios.main.post
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Button
@@ -19,8 +21,7 @@ import com.example.instagram.Scenarios.main.HomeActivity
 import kotlinx.android.synthetic.main.activity_chat.*
 
 class PostRegisterActivity : AppCompatActivity() {
-    private lateinit var launcher: ImagePickerLauncher
-
+    private val OPEN_GALLERY = 1
     @SuppressLint("MissingInflatedId")
     override fun onStart() {
         super.onStart()
@@ -38,28 +39,9 @@ class PostRegisterActivity : AppCompatActivity() {
             this.finish()
         }
 
-        launcher = registerImagePicker { result ->
-            if (result.isNotEmpty()) {
-                val profileImage = result.first() // 1장만 선택하기 때문에
-
-                // 이미지 Uri를 통해 이미지뷰에 이미지를 넣어준다.
-                setProfileImage(profileImage.uri)
-            }
-        }
         imgSelect.setOnClickListener {
-            val config = ImagePickerConfig {
-                mode = ImagePickerMode.SINGLE // 1장만 선택
-                isFolderMode = false
-                isIncludeVideo = false
-                arrowColor = Color.BLACK
-                doneButtonText = "추가" // returnMode가 NONE인 경우 표시됨
-                isShowCamera = true
-                returnMode = ReturnMode.ALL
-            }
-
-            launcher.launch(config)
+            navigatePhotos()
         }
-
         postingBtn.isEnabled = false
 
         editContent.addTextChangedListener(object : TextWatcher {
@@ -95,9 +77,28 @@ class PostRegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun setProfileImage(imageUri: Uri) {
-        val pImg : ImageView = findViewById(R.id.pImage)
-        Glide.with(this).load(imageUri).circleCrop().into(pImg)
+    private fun navigatePhotos() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "image/*"
+        startActivityForResult(intent, OPEN_GALLERY)
     }
 
+    @Override
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == Activity.RESULT_OK){
+            if(resultCode == OPEN_GALLERY){
+                var currentImageUrl : Uri? = data?.data
+                try{
+                    val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, currentImageUrl)
+                    imgSelect.setImageBitmap(bitmap)
+                }catch(e: Exception){
+                    e.printStackTrace()
+                }
+            }
+        }
+        else{
+
+        }
+    }
 }

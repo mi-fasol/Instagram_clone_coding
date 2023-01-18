@@ -24,7 +24,7 @@ class PostRegisterActivity : AppCompatActivity() {
         val backBtn: Button = findViewById(R.id.backHome)
         val postingBtn: Button = findViewById(R.id.posting)
         var postContent: String = ""
-        val editContent: EditText = findViewById(R.id.postContent)
+        val editContent: EditText = findViewById(R.id.pContent)
 
         backBtn.setOnClickListener {
             this.finish()

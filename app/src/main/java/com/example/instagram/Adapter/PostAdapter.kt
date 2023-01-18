@@ -2,10 +2,12 @@ package com.example.instagram.Adapter
 
 import android.content.Context
 import android.content.Intent
+import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -21,10 +23,10 @@ class PostAdapter(private var context: Context) :
 
     val pref = UserSharedPreferences
 
-    private val pId = arrayOf(pref.getPostUserId(context), "pwfkvs341d", "iowcjvpxe_awev")
-    private val cId = arrayOf("eoisjfv_qohn", "poirjbg", "24rfd_ih_.1")
-    private val content = arrayOf(pref.getUserPost(context), "히욱", "힝구링")
-    private val comment = arrayOf("오오오", "오타났어", "힝")
+    val pId = arrayOf(pref.getPostUserId(context), "pwfkvs341d", "iowcjvpxe_awev")
+    val cId = arrayOf("eoisjfv_qohn", "poirjbg", "24rfd_ih_.1")
+    val content = arrayOf(pref.getUserPost(context), "히욱", "힝구링")
+    val comment = arrayOf("오오오", "오타났어", "힝")
 
     override fun getItemCount(): Int {
         return pId.size
@@ -56,6 +58,9 @@ class PostAdapter(private var context: Context) :
         var postImage: ImageView
         var userImage: ImageView
         var pUserId : TextView
+        var postLayout : LinearLayout
+        var commentLayout : LinearLayout
+        var heart : TextView
 
         init {
             pUserId = itemView.findViewById(R.id.pUserId)
@@ -65,11 +70,40 @@ class PostAdapter(private var context: Context) :
             comment = itemView.findViewById(R.id.userComment)
             postImage = itemView.findViewById(R.id.postImage)
             userImage = itemView.findViewById(R.id.profileImage)
+            postLayout = itemView.findViewById(R.id.postLayout)
+            commentLayout = itemView.findViewById(R.id.commentLayout)
+            heart = itemView.findViewById(R.id.getHeart)
 
             itemView.setOnClickListener {
-                Intent(context, CommentActivity::class.java).apply {
-                }.run {
-                    context.startActivity(this)
+                postId.setOnClickListener {
+                    Intent(context, CommentActivity::class.java).apply {
+                    }.run {
+                        context.startActivity(this)
+                    }
+                }
+                postContent.setOnClickListener {
+                    Intent(context, CommentActivity::class.java).apply {
+                    }.run {
+                        context.startActivity(this)
+                    }
+                }
+                commentId.setOnClickListener {
+                    Intent(context, CommentActivity::class.java).apply {
+                    }.run {
+                        context.startActivity(this)
+                    }
+                }
+                comment.setOnClickListener {
+                    Intent(context, CommentActivity::class.java).apply {
+                    }.run {
+                        context.startActivity(this)
+                    }
+                }
+                heart.setOnClickListener {
+                    Intent(context, CommentActivity::class.java).apply {
+                    }.run {
+                        context.startActivity(this)
+                    }
                 }
             }
         }

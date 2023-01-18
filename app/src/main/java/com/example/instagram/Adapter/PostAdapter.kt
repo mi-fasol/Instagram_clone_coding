@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.instagram.Data.UserSharedPreferences
 import com.example.instagram.R
 import com.example.instagram.Scenarios.main.HomeActivity
 import com.example.instagram.Scenarios.main.post.CommentActivity
@@ -18,10 +19,12 @@ import org.w3c.dom.Comment
 class PostAdapter(private var context: Context) :
     RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
-    private val pId = arrayOf("mi_fasol", "pwfkvs341d", "iowcjvpxe_awev")
+    val pref = UserSharedPreferences
+
+    private val pId = arrayOf(pref.getPostUserId(context), "pwfkvs341d", "iowcjvpxe_awev")
     private val cId = arrayOf("eoisjfv_qohn", "poirjbg", "24rfd_ih_.1")
-    private val content = arrayOf("배고프다", "히욱", "힝구링")
-    private val comment = arrayOf("햐", "오타났어", "힝")
+    private val content = arrayOf(pref.getUserPost(context), "히욱", "힝구링")
+    private val comment = arrayOf("오오오", "오타났어", "힝")
 
     override fun getItemCount(): Int {
         return pId.size
@@ -32,6 +35,11 @@ class PostAdapter(private var context: Context) :
         holder.commentId.text = cId[position]
         holder.comment.text = comment[position]
         holder.postContent.text = content[position]
+        holder.pUserId.text = pref.getPostUserId(context)
+        if(holder.pUserId.text != pref.getUserId(context)){
+            holder.pUserId.text = pref.getUserId(context)
+            holder.postId.text = pref.getUserId(context)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -47,8 +55,10 @@ class PostAdapter(private var context: Context) :
         var comment: TextView
         var postImage: ImageView
         var userImage: ImageView
+        var pUserId : TextView
 
         init {
+            pUserId = itemView.findViewById(R.id.pUserId)
             postId = itemView.findViewById(R.id.postNickname)
             postContent = itemView.findViewById(R.id.postContent)
             commentId = itemView.findViewById(R.id.cNickname)

@@ -2,6 +2,7 @@ package com.example.instagram.Scenarios.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.instagram.*
 import com.example.instagram.Scenarios.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -19,33 +20,32 @@ class HomeActivity : AppCompatActivity() {
                 when (it.itemId) {
                     R.id.nav_home -> {
                         val homeFragment = HomeFragment()
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.fl_container, homeFragment).commit()
+                        onFragmentChange(homeFragment)
                     }
                     R.id.nav_search -> {
                         val searchFragment = SearchFragment()
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.fl_container, searchFragment).commit()
+                        onFragmentChange(searchFragment)
                     }
                     R.id.nav_video -> {
                         val videoFragment = VideoFragment()
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.fl_container, videoFragment).commit()
+                        onFragmentChange(videoFragment)
                     }
                     R.id.nav_shopping -> {
                         val shoppingFragment = ShoppingFragment()
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.fl_container, shoppingFragment).commit()
+                        onFragmentChange(shoppingFragment)
                     }
                     else -> {
                         val myPageFragment = MyPageFragment()
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.fl_container, myPageFragment).commit()
+                        onFragmentChange(myPageFragment)
                     }
                 }
                 true
             }
             selectedItemId = R.id.nav_home
         }
+    }
+
+    fun onFragmentChange(frag: Fragment) {
+        supportFragmentManager.beginTransaction().replace(R.id.fl_container, frag).commit()
     }
 }

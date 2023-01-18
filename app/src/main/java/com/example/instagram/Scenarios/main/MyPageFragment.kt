@@ -1,12 +1,12 @@
 package com.example.instagram.Scenarios.main
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +15,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -24,9 +23,7 @@ import com.example.instagram.Adapter.GridAdapter
 import com.example.instagram.Data.UserSharedPreferences
 import com.example.instagram.R
 import com.example.instagram.Scenarios.intro.MainActivity
-import com.example.instagram.Scenarios.intro.RegisterActivity
-import com.example.instagram.Scenarios.main.post.PostRegisterActivity
-import com.example.instagram.Viewmodel.SignViewModel
+import com.example.instagram.Scenarios.main.post.UserPostFragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -36,6 +33,17 @@ import com.google.firebase.auth.FirebaseAuth
 class MyPageFragment : Fragment() {
     private var googleSignInClient: GoogleSignInClient? = null
     lateinit var auth: FirebaseAuth
+    var activity: HomeActivity? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        activity = getActivity() as HomeActivity
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        activity = null
+    }
 
     private lateinit var launcher: ImagePickerLauncher
 
@@ -105,21 +113,27 @@ class MyPageFragment : Fragment() {
             startActivity(intent)
         }
 
+        val adapter: GridAdapter by lazy { GridAdapter(requireContext()) }
+        adapter.setItemClickListener(object : GridAdapter.ItemClickListener {
+            override fun onClick(view: View, position: Int) {
+                Log.d("navigationnnn", "될까?")
+                activity?.onFragmentChange(UserPostFragment())
+            }
+        })
+
         return view
     }
 
     private fun setProfileImage(imageUri: Uri, view: View) {
-        val pImg : ImageView = view.findViewById(R.id.pImage)
+        val pImg: ImageView = view.findViewById(R.id.pImage)
         Glide.with(this).load(imageUri).circleCrop().into(pImg)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val gv = view.findViewById<RecyclerView>(R.id.gv_myPage)
-        gv.apply {
-            layoutManager = GridLayoutManager(activity, 3)
-            adapter = GridAdapter()
-        }
+        gv.layoutManager = GridLayoutManager(activity, 3)
+        gv.adapter = GridAdapter(requireContext())
     }
 
     private fun signOut() {

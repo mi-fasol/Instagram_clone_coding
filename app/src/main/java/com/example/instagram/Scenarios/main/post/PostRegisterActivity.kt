@@ -75,7 +75,7 @@ class PostRegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigatePhotos() {
+    fun navigatePhotos() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
         startActivityForResult(intent, GALLERY)

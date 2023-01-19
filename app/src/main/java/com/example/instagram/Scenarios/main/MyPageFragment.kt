@@ -23,6 +23,7 @@ import com.example.instagram.Adapter.GridAdapter
 import com.example.instagram.Data.UserSharedPreferences
 import com.example.instagram.R
 import com.example.instagram.Scenarios.intro.MainActivity
+import com.example.instagram.Scenarios.main.post.PostRegisterActivity
 import com.example.instagram.Scenarios.main.post.UserPostFragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -76,18 +77,7 @@ class MyPageFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.addPost).setOnClickListener {
-            val config = ImagePickerConfig {
-                mode = ImagePickerMode.SINGLE // 1장만 선택
-                isFolderMode = false
-                isIncludeVideo = false
-                arrowColor = Color.WHITE
-                imageTitle = "이미지를 선택하세요"
-                doneButtonText = "추가" // returnMode가 NONE인 경우 표시됨
-                isShowCamera = true
-                returnMode = ReturnMode.ALL
-            }
-
-            launcher.launch(config)
+            startActivity(Intent(activity, PostRegisterActivity::class.java))
         }
 
         view.findViewById<Button>(R.id.menu).setOnClickListener {

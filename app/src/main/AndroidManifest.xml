@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <queries>
+        <provider
+            android:authorities="com.google.android.apps.docs.storage"
+            android:exported="false" />
+    </queries>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -35,8 +43,8 @@
         <activity android:name=".Scenarios.main.NotificationActivity" />
         <activity android:name=".Scenarios.main.post.CommentActivity" />
         <activity android:name=".Scenarios.intro.SignInActivity" />
-        <activity android:name=".Scenarios.intro.RegisterActivity"/>
-        <activity android:name=".Scenarios.main.ProfileEditActivity"/>
+        <activity android:name=".Scenarios.intro.RegisterActivity" />
+        <activity android:name=".Scenarios.main.ProfileEditActivity" />
     </application>
 
 </manifest>

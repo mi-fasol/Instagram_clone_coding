@@ -3,7 +3,6 @@ package com.example.instagram.Scenarios.main.post
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.provider.MediaStore
 import android.text.Editable
@@ -13,7 +12,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
 import com.esafirm.imagepicker.features.*
 import com.example.instagram.Data.UserSharedPreferences
 import com.example.instagram.R
@@ -22,7 +20,9 @@ import kotlinx.android.synthetic.main.activity_chat.*
 
 @Suppress("DEPRECATION")
 class PostRegisterActivity : AppCompatActivity() {
-    private val OPEN_GALLERY = 1
+    private val GALLERY = 1
+    private var imageView: ImageView? = null
+
     @SuppressLint("MissingInflatedId")
     override fun onStart() {
         super.onStart()
@@ -34,15 +34,17 @@ class PostRegisterActivity : AppCompatActivity() {
         val postingBtn: Button = findViewById(R.id.posting)
         val editContent: EditText = findViewById(R.id.pContent)
         var postContent = ""
-        val imgSelect : ImageView = findViewById(R.id.pImage)
 
         backBtn.setOnClickListener {
             this.finish()
         }
 
-        imgSelect.setOnClickListener {
+        imageView = findViewById(R.id.pImage)
+
+        imageView?.setOnClickListener {
             navigatePhotos()
         }
+
         postingBtn.isEnabled = false
 
         editContent.addTextChangedListener(object : TextWatcher {
@@ -69,11 +71,6 @@ class PostRegisterActivity : AppCompatActivity() {
         postingBtn.setOnClickListener {
             pref.setUserPost(this, postContent)
             pref.setPostUserId(this, pref.getUserId(this))
-            Toast.makeText(
-                this@PostRegisterActivity,
-                "${pref.getUserPost(this)}, Id: ${pref.getUserId(this)}",
-                Toast.LENGTH_SHORT
-            ).show()
             startActivity(Intent(this, HomeActivity::class.java))
         }
     }
@@ -81,26 +78,24 @@ class PostRegisterActivity : AppCompatActivity() {
     private fun navigatePhotos() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
-        startActivityForResult(intent, OPEN_GALLERY)
+        startActivityForResult(intent, GALLERY)
     }
 
+    @Deprecated("Deprecated in Java")
     @Override
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val imgSelect : ImageView = findViewById(R.id.pImage)
         super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode == Activity.RESULT_OK){
-            if(resultCode == OPEN_GALLERY){
-                var currentImageUrl : Uri? = data?.data
-                try{
-                    val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, currentImageUrl)
-                    imgSelect.setImageBitmap(bitmap)
-                }catch(e: Exception){
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == GALLERY) {
+                val imageData: Uri? = data?.data
+                try {
+                    val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageData)
+                    imageView!!.setImageBitmap(bitmap)
+                } catch (e: Exception) {
                     e.printStackTrace()
                 }
             }
-        }
-        else{
-
         }
     }
 }

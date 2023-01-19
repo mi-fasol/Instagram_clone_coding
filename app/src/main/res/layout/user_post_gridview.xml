@@ -12,7 +12,7 @@
         android:id="@+id/myPagePost"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:src="@drawable/img"
+        android:src="@drawable/cat"
         app:layout_constraintDimensionRatio="H, 1:1"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"

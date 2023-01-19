@@ -55,7 +55,7 @@
         android:layout_height="414dp"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/img" />
+        android:src="@drawable/cat" />
 
     <RelativeLayout
         android:layout_width="match_parent"

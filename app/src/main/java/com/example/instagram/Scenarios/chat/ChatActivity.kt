@@ -9,10 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instagram.Adapter.ChatAdapter
 import com.example.instagram.Data.ChatData
-import com.example.instagram.Data.ImgData
 import com.example.instagram.Data.UserSharedPreferences
 import com.example.instagram.R
-import com.example.instagram.Scenarios.main.HomeActivity
 import com.example.instagram.Scenarios.main.post.PostRegisterActivity
 
 class ChatActivity : AppCompatActivity() {
@@ -41,7 +39,7 @@ class ChatActivity : AppCompatActivity() {
             finish()
         }
         dImg.add(ChatData(getDrawable(R.drawable.cha)!!))
-        dImg.add(ChatData(getDrawable(R.drawable.img)!!))
+        dImg.add(ChatData(getDrawable(R.drawable.cat)!!))
         dImg.add(ChatData(getDrawable(R.drawable.dog)!!))
 
         initRecycler()

@@ -67,71 +67,65 @@ class MyPostAdapter(private var context: Context) :
                     context.startActivity(this)
                 }
             }
-            holder.mGetHeart.setOnClickListener {
-                Intent(context, CommentActivity::class.java).apply {
-                }.run {
-                    context.startActivity(this)
-                }
-            }
         }
     }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val v =
-                LayoutInflater.from(parent.context)
-                    .inflate(R.layout.my_post_recycler, parent, false)
-            return ViewHolder(v)
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val v =
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.my_post_recycler, parent, false)
+        return ViewHolder(v)
+    }
 
-        inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-            var myPostId: TextView
-            var myPostContent: TextView
-            var myCommentId: TextView
-            var myComment: TextView
-            var myPostImage: ImageView
-            var myProfileImage: ImageView
-            var myId: TextView
-            private var postLayout: LinearLayout
-            var all: LinearLayout
-            var mGetHeart: TextView
-            val menu: Button
+        var myPostId: TextView
+        var myPostContent: TextView
+        var myCommentId: TextView
+        var myComment: TextView
+        var myPostImage: ImageView
+        var myProfileImage: ImageView
+        var myId: TextView
+        private var postLayout: LinearLayout
+        var all: LinearLayout
+        var mGetHeart: TextView
+        val menu: Button
 
-            init {
-                myId = itemView.findViewById(R.id.myId)
-                myPostId = itemView.findViewById(R.id.myPostId)
-                myPostContent = itemView.findViewById(R.id.myPostContent)
-                myCommentId = itemView.findViewById(R.id.myCommentId)
-                myComment = itemView.findViewById(R.id.myComment)
-                myPostImage = itemView.findViewById(R.id.myPostImage)
-                myProfileImage = itemView.findViewById(R.id.myProfileImage)
-                postLayout = itemView.findViewById(R.id.mPostLayout)
-                all = itemView.findViewById(R.id.mAllLayout)
-                mGetHeart = itemView.findViewById(R.id.mGetHeart)
-                menu = itemView.findViewById(R.id.myPostMenu)
+        init {
+            myId = itemView.findViewById(R.id.myId)
+            myPostId = itemView.findViewById(R.id.myPostId)
+            myPostContent = itemView.findViewById(R.id.myPostContent)
+            myCommentId = itemView.findViewById(R.id.myCommentId)
+            myComment = itemView.findViewById(R.id.myComment)
+            myPostImage = itemView.findViewById(R.id.myPostImage)
+            myProfileImage = itemView.findViewById(R.id.myProfileImage)
+            postLayout = itemView.findViewById(R.id.mPostLayout)
+            all = itemView.findViewById(R.id.mAllLayout)
+            mGetHeart = itemView.findViewById(R.id.mGetHeart)
+            menu = itemView.findViewById(R.id.myPostMenu)
 
-                val showPopUp = PopupMenu(
-                    context, menu
-                )
+            val showPopUp = PopupMenu(
+                context, menu
+            )
 
-                showPopUp.menu.add(Menu.NONE, 0, 0, "게시물 삭제")
+            showPopUp.menu.add(Menu.NONE, 0, 0, "게시물 삭제")
 
 
-                showPopUp.setOnMenuItemClickListener { menuItem ->
-                    val id = menuItem.itemId
-                    if (id == 0) {
-                        pref.removePost(context)
-                        Intent(context, HomeActivity::class.java).apply {
-                        }.run {
-                            context.startActivity(this)
-                        }
+            showPopUp.setOnMenuItemClickListener { menuItem ->
+                val id = menuItem.itemId
+                if (id == 0) {
+                    pref.removePost(context)
+                    Intent(context, HomeActivity::class.java).apply {
+                    }.run {
+                        context.startActivity(this)
                     }
-                    false
                 }
+                false
+            }
 
-                menu.setOnClickListener {
-                    showPopUp.show()
-                }
+            menu.setOnClickListener {
+                showPopUp.show()
             }
         }
     }
+}

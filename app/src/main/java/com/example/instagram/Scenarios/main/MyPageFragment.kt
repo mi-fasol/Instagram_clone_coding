@@ -3,7 +3,6 @@ package com.example.instagram.Scenarios.main
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -144,6 +143,7 @@ class MyPageFragment : Fragment() {
             if (it.isSuccessful) {
                 val pref = UserSharedPreferences
                 pref.removeUser(context)
+                Toast.makeText(context, "회원 탈퇴가 완료되었습니다.", Toast.LENGTH_SHORT).show()
                 signOut()
             } else {
                 Toast.makeText(context, "실패했습니다.", Toast.LENGTH_SHORT).show()

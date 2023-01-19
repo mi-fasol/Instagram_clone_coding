@@ -20,9 +20,9 @@ class MyPostAdapter(private var context: Context) :
 
     val pref = UserSharedPreferences
 
-    val pId = pref.getPostUserId(context)
+    val pId = pref.getUserId(context)
     val cId = arrayOf("vasd._.4x3", "yej1n_bxx", ".1.3tg.sa")
-    val content = arrayOf(pref.getUserPost(context), "아 진짜 오늘 개빡치는 하루였다고", "저메추 해조~~!!")
+    val content = arrayOf("우짤래미 저짤래미", "아 진짜 오늘 개빡치는 하루였다고", "저메추 해조~~!!")
     val comment = arrayOf("어쩔티비", "뭔 일인데", "등촌 샤브샤브!!!!!")
 
     override fun getItemCount(): Int {

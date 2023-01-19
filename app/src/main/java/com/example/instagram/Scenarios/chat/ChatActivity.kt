@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instagram.Adapter.ChatAdapter
-import com.example.instagram.Adapter.CommentAdapter
 import com.example.instagram.Data.ChatData
 import com.example.instagram.Data.ImgData
 import com.example.instagram.Data.UserSharedPreferences

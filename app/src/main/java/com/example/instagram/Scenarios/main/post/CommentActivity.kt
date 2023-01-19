@@ -44,7 +44,7 @@ class CommentActivity : AppCompatActivity() {
         postUser.text = pref.getPostUserId(this)
         postContent.text = pref.getUserPost(this)
 
-        cImg.add(ImgData(getDrawable(R.drawable.img)!!))
+        cImg.add(ImgData(getDrawable(R.drawable.shopping)!!))
         cImg.add(ImgData(getDrawable(R.drawable.dog)!!))
         cImg.add(ImgData(getDrawable(R.drawable.cha)!!))
 

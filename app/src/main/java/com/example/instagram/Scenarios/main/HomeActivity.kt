@@ -1,11 +1,17 @@
 package com.example.instagram.Scenarios.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.ThemedSpinnerAdapter.Helper
 import androidx.fragment.app.Fragment
 import com.example.instagram.*
 import com.example.instagram.Scenarios.*
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomnavigation.LabelVisibilityMode
+import com.google.android.material.navigation.NavigationBarView
+
 
 @Suppress("DEPRECATION")
 class HomeActivity : AppCompatActivity() {

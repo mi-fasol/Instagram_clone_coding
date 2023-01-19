@@ -6,11 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instagram.*
+import com.example.instagram.Adapter.MyPostAdapter
 import com.example.instagram.Adapter.PostAdapter
+import com.example.instagram.Data.UserSharedPreferences
 import com.example.instagram.Scenarios.*
 import com.example.instagram.Scenarios.main.*
 
@@ -27,11 +30,14 @@ class UserPostFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val view: View = inflater.inflate(R.layout.fragment_user_post, container, false)
+        val pref = UserSharedPreferences
 
         view.findViewById<Button>(R.id.backToMyPage).setOnClickListener {
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.fragment_container, MyPageFragment())?.addToBackStack(null)?.commit()
         }
+
+        view.findViewById<TextView>(R.id.nickname).text = pref.getUserId(requireContext())
 
         return view
     }
@@ -41,7 +47,7 @@ class UserPostFragment : Fragment() {
         val rv = view.findViewById<RecyclerView>(R.id.rv_user_post)
         rv.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = PostAdapter(context)
+            adapter = MyPostAdapter(context)
         }
     }
 }

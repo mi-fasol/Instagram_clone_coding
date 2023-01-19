@@ -20,6 +20,7 @@ import com.example.instagram.R
 import com.example.instagram.Scenarios.main.HomeActivity
 import kotlinx.android.synthetic.main.activity_chat.*
 
+@Suppress("DEPRECATION")
 class PostRegisterActivity : AppCompatActivity() {
     private val OPEN_GALLERY = 1
     @SuppressLint("MissingInflatedId")
@@ -85,6 +86,7 @@ class PostRegisterActivity : AppCompatActivity() {
 
     @Override
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val imgSelect : ImageView = findViewById(R.id.pImage)
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode == Activity.RESULT_OK){
             if(resultCode == OPEN_GALLERY){

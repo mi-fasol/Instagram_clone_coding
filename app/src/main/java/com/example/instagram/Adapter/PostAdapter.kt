@@ -40,78 +40,87 @@ class PostAdapter(private var context: Context) :
         holder.comment.text = comment[position]
         holder.postContent.text = content[position]
         holder.pUserId.text = pId[position]
+
+        holder.itemView.setOnClickListener { v ->
+            holder.all.setOnClickListener {
+                Intent(context, CommentActivity::class.java).apply {
+                }.run {
+                    context.startActivity(this)
+                }
+            }
+            holder.postId.setOnClickListener {
+                Intent(context, CommentActivity::class.java).apply {
+                }.run {
+                    context.startActivity(this)
+                }
+            }
+            holder.postContent.setOnClickListener {
+                Intent(context, CommentActivity::class.java).apply {
+                }.run {
+                    context.startActivity(this)
+                }
+            }
+            holder.commentId.setOnClickListener {
+                Intent(context, CommentActivity::class.java).apply {
+                }.run {
+                    context.startActivity(this)
+                }
+            }
+            holder.comment.setOnClickListener {
+                Intent(context, CommentActivity::class.java).apply {
+                }.run {
+                    context.startActivity(this)
+                }
+            }
+            holder.heart.setOnClickListener {
+                Intent(context, CommentActivity::class.java).apply {
+                }.run {
+                    context.startActivity(this)
+                }
+            }
+        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v =
-            LayoutInflater.from(parent.context).inflate(R.layout.post_item_recycler, parent, false)
-        return ViewHolder(v)
-    }
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+            val v =
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.post_item_recycler, parent, false)
+            return ViewHolder(v)
+        }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var postId: TextView
-        var postContent: TextView
-        var commentId: TextView
-        var comment: TextView
-        var postImage: ImageView
-        var userImage: ImageView
-        var pUserId: TextView
-        var postLayout: LinearLayout
-        var commentLayout: LinearLayout
-        var heart: TextView
-        val menu: Button
+            var postId: TextView
+            var postContent: TextView
+            var commentId: TextView
+            var comment: TextView
+            var postImage: ImageView
+            var userImage: ImageView
+            var pUserId: TextView
+            private var postLayout: LinearLayout
+            var all: LinearLayout
+            var heart: TextView
+            val menu: Button
 
-        init {
-            pUserId = itemView.findViewById(R.id.postUserId)
-            postId = itemView.findViewById(R.id.postNickname)
-            postContent = itemView.findViewById(R.id.postContent)
-            commentId = itemView.findViewById(R.id.cNickname)
-            comment = itemView.findViewById(R.id.userComment)
-            postImage = itemView.findViewById(R.id.postImage)
-            userImage = itemView.findViewById(R.id.profileImage)
-            postLayout = itemView.findViewById(R.id.postLayout)
-            commentLayout = itemView.findViewById(R.id.commentLayout)
-            heart = itemView.findViewById(R.id.getHeart)
-            menu = itemView.findViewById(R.id.postMenu)
+            init {
+                pUserId = itemView.findViewById(R.id.postUserId)
+                postId = itemView.findViewById(R.id.postNickname)
+                postContent = itemView.findViewById(R.id.postContent)
+                commentId = itemView.findViewById(R.id.cNickname)
+                comment = itemView.findViewById(R.id.userComment)
+                postImage = itemView.findViewById(R.id.postImage)
+                userImage = itemView.findViewById(R.id.proImg)
+                postLayout = itemView.findViewById(R.id.postLayout)
+                all = itemView.findViewById(R.id.allLayout)
+                heart = itemView.findViewById(R.id.getHeart)
+                menu = itemView.findViewById(R.id.postMenu)
 
-            val showPopUp = PopupMenu(
-                context, menu
-            )
+                val showPopUp = PopupMenu(
+                    context, menu
+                )
 
-            showPopUp.menu.add(Menu.NONE, 0, 0, "게시물 삭제")
-            itemView.setOnClickListener {
+                showPopUp.menu.add(Menu.NONE, 0, 0, "게시물 삭제")
 
-                postId.setOnClickListener {
-                    Intent(context, CommentActivity::class.java).apply {
-                    }.run {
-                        context.startActivity(this)
-                    }
-                }
-                postContent.setOnClickListener {
-                    Intent(context, CommentActivity::class.java).apply {
-                    }.run {
-                        context.startActivity(this)
-                    }
-                }
-                commentId.setOnClickListener {
-                    Intent(context, CommentActivity::class.java).apply {
-                    }.run {
-                        context.startActivity(this)
-                    }
-                }
-                comment.setOnClickListener {
-                    Intent(context, CommentActivity::class.java).apply {
-                    }.run {
-                        context.startActivity(this)
-                    }
-                }
-                heart.setOnClickListener {
-                    Intent(context, CommentActivity::class.java).apply {
-                    }.run {
-                        context.startActivity(this)
-                    }
-                }
 
                 showPopUp.setOnMenuItemClickListener { menuItem ->
                     val id = menuItem.itemId
@@ -131,4 +140,3 @@ class PostAdapter(private var context: Context) :
             }
         }
     }
-}

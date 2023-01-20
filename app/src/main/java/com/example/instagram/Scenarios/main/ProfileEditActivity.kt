@@ -57,7 +57,7 @@ class ProfileEditActivity : AppCompatActivity() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (editId.length() <= 10) {
                     userId = editId.text.toString()
-                    if (userId.length > 5) {
+                    if (userId.length > 5 && editNick.text.isNotEmpty()) {
                         loginButton.isEnabled = true
                     }
                 } else {
@@ -82,8 +82,11 @@ class ProfileEditActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (editNick.length() in 0..20) {
+                if (editNick.text.length in 0..20) {
                     userNick = editNick.text.toString()
+                    if(userNick != "" && userId == editId.text.toString()){
+                        loginButton.isEnabled = true
+                    }
                 } else {
                     loginButton.isEnabled = false
                     Toast.makeText(

@@ -13,22 +13,20 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.instagram.Data.UserSharedPreferences
 import com.example.instagram.R
-import com.example.instagram.Scenarios.intro.SignInActivity
+import com.example.instagram.databinding.ActivityProfileEditBinding
 import java.util.regex.Pattern
 
 class ProfileEditActivity : AppCompatActivity() {
+    lateinit var binding: ActivityProfileEditBinding
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile_edit)
-
-        val editId: EditText = findViewById(R.id.registerId)
-        val editNick: EditText = findViewById(R.id.registerNick)
-        val backTo: Button = findViewById(R.id.toSign)
+        binding = ActivityProfileEditBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         var userId = ""
         var userNick = ""
-        val loginButton: Button = findViewById(R.id.registerComplete)
         val userPref = UserSharedPreferences
 
         val filterId = InputFilter { source, start, end, dest, dstart, dend ->
@@ -41,33 +39,33 @@ class ProfileEditActivity : AppCompatActivity() {
             }
         }
 
-        loginButton.isEnabled = false
+        binding.registerComplete.isEnabled = false
 
-        editId.setText(userPref.getUserId(this))
-        editNick.setText(userPref.getUserNick(this))
+        binding.registerId.setText(userPref.getUserId(this))
+        binding.registerNick.setText(userPref.getUserNick(this))
 
-        editId.filters = arrayOf(filterId)
+        binding.registerId.filters = arrayOf(filterId)
 
-        editId.addTextChangedListener(object : TextWatcher {
+        binding.registerId.addTextChangedListener(object : TextWatcher {
             var maxText = ""
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 maxText = p0.toString()
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (editId.length() <= 10) {
-                    userId = editId.text.toString()
-                    if (userId.length > 5 && editNick.text.isNotEmpty()) {
-                        loginButton.isEnabled = true
+                if (binding.registerId.length() <= 10) {
+                    userId = binding.registerId.text.toString()
+                    if (userId.length > 5 && binding.registerNick.text.isNotEmpty()) {
+                        binding.registerId.isEnabled = true
                     }
                 } else {
-                    loginButton.isEnabled = false
+                    binding.registerId.isEnabled = false
                     Toast.makeText(
                         this@ProfileEditActivity,
                         "아이디는 6글자 이상 10글자 이하로 작성해주세요.",
                         Toast.LENGTH_SHORT
                     ).show()
-                    editId.setText(maxText)
+                    binding.registerId.setText(maxText)
                 }
             }
 
@@ -75,36 +73,36 @@ class ProfileEditActivity : AppCompatActivity() {
             }
         })
 
-        editNick.addTextChangedListener(object : TextWatcher {
+        binding.registerNick.addTextChangedListener(object : TextWatcher {
             var maxText = ""
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 maxText = p0.toString()
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (editNick.text.length in 0..20) {
-                    userNick = editNick.text.toString()
-                    if(userNick != "" && userId == editId.text.toString()){
-                        loginButton.isEnabled = true
+                if (binding.registerNick.text.length in 0..20) {
+                    userNick = binding.registerNick.text.toString()
+                    if(userNick != "" && userId == binding.registerId.text.toString()){
+                        binding.registerId.isEnabled = true
                     }
                 } else {
-                    loginButton.isEnabled = false
+                    binding.registerId.isEnabled = false
                     Toast.makeText(
                         this@ProfileEditActivity,
                         "닉네임은 20글자를 넘을 수 없습니다.",
                         Toast.LENGTH_SHORT
                     ).show()
-                    editNick.setText(maxText)
+                    binding.registerNick.setText(maxText)
                 }
             }
 
             override fun afterTextChanged(p0: Editable?) {}
         })
 
-        loginButton.setOnClickListener {
-            if(editId.text.length > 5 && editNick.text.isNotEmpty()) {
-                userPref.setUserNick(this, editNick.text.toString())
-                userPref.setUserId(this, editId.text.toString())
+        binding.registerId.setOnClickListener {
+            if(binding.registerId.text.length > 5 && binding.registerNick.text.isNotEmpty()) {
+                userPref.setUserNick(this, binding.registerNick.text.toString())
+                userPref.setUserId(this, binding.registerId.text.toString())
                 val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
                 finish()
@@ -118,7 +116,7 @@ class ProfileEditActivity : AppCompatActivity() {
             }
         }
 
-        backTo.setOnClickListener {
+        binding.toSign.setOnClickListener {
             this.finish()
         }
     }

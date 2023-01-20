@@ -1,26 +1,21 @@
 package com.example.instagram.Scenarios.main
 
 import android.content.Intent
-import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.esafirm.imagepicker.features.*
 import com.example.instagram.Adapter.PostAdapter
 import com.example.instagram.Data.UserSharedPreferences
-import com.example.instagram.R
-import com.example.instagram.Scenarios.main.post.PostRegisterActivity
 import com.example.instagram.Scenarios.chat.ChatActivity
+import com.example.instagram.Scenarios.main.post.PostRegisterActivity
+import com.example.instagram.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
+    lateinit var binding: FragmentHomeBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,31 +25,30 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view: View = inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        view.findViewById<Button>(R.id.addPost).setOnClickListener {
+        binding.addPost.setOnClickListener {
             val intent = Intent(activity, PostRegisterActivity::class.java)
             startActivity(intent)
         }
 
-        view.findViewById<Button>(R.id.heart).setOnClickListener {
+        binding.heart.setOnClickListener {
             val intent = Intent(activity, NotificationActivity::class.java)
             startActivity(intent)
         }
 
-        view.findViewById<Button>(R.id.dm).setOnClickListener {
+        binding.dm.setOnClickListener {
             val intent = Intent(activity, ChatActivity::class.java)
             startActivity(intent)
         }
 
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val rv = view.findViewById<RecyclerView>(R.id.rv_profile)
         val pref = UserSharedPreferences
-        rv.apply {
+        binding.rvProfile.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = PostAdapter(context)
         }

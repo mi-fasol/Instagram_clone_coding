@@ -6,11 +6,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
-import com.example.instagram.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.instagram.Adapter.MyPostAdapter
+import com.example.instagram.databinding.FragmentSearchBinding
 
 class SearchFragment : Fragment() {
+    lateinit var binding: FragmentSearchBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -20,13 +23,19 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view: View = inflater!!.inflate(R.layout.fragment_search, container, false)
-        view.findViewById<Button>(R.id.searchCancel).setOnClickListener {
+    ): View {
+        binding = FragmentSearchBinding.inflate(inflater, container, false)
+
+        binding.searchCancel.setOnClickListener {
             val intent = Intent(activity, HomeActivity::class.java)
             startActivity(intent)
         }
 
-        return view
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
     }
 }

@@ -8,11 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.instagram.Data.UserSharedPreferences
 import com.example.instagram.R
 import com.example.instagram.Scenarios.main.HomeActivity
+import com.example.instagram.databinding.ActivitySignInBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -20,17 +20,17 @@ import com.google.firebase.auth.GoogleAuthProvider
 
 @Suppress("DEPRECATION")
 class SignInActivity : AppCompatActivity() {
+    lateinit var binding: ActivitySignInBinding
     private lateinit var googleSignInClient: GoogleSignInClient
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val RC_SIGN_IN = 9001
-    private val SignInButton: SignInButton by lazy { findViewById(R.id.google_login) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_in)
+        binding = ActivitySignInBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val signInButton: SignInButton = findViewById(R.id.google_login)
-        val googleTextView: TextView = signInButton.getChildAt(0) as TextView
+        val googleTextView: TextView = binding.googleLogin.getChildAt(0) as TextView
         googleTextView.text = "구글로 로그인            "
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -52,7 +52,7 @@ class SignInActivity : AppCompatActivity() {
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        SignInButton.setOnClickListener {
+        binding.googleLogin.setOnClickListener {
             googleSignIn()
         }
     }

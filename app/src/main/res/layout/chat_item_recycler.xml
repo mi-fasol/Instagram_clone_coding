@@ -14,7 +14,8 @@
             android:id="@+id/dUserImg"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="5dp"
             android:background="@android:color/transparent"
             android:src="@drawable/profile_image" />
 
@@ -29,7 +30,6 @@
                 android:id="@+id/dUserId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/dUserImg"
                 android:text="미파솔"
                 android:textColor="@color/black"
                 android:textSize="12dp"
@@ -39,14 +39,10 @@
                 android:id="@+id/dContent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/dUserId"
-                android:layout_centerVertical="true"
                 android:text="새로운 메시지 2개"
                 android:textColor="@color/black"
                 android:textSize="12dp"
                 android:textStyle="bold" />
         </LinearLayout>
     </RelativeLayout>
-
-
 </LinearLayout>

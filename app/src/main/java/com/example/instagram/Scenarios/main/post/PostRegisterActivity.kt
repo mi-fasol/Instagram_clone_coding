@@ -7,54 +7,49 @@ import android.net.Uri
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.esafirm.imagepicker.features.*
 import com.example.instagram.Data.UserSharedPreferences
-import com.example.instagram.R
 import com.example.instagram.Scenarios.main.HomeActivity
+import com.example.instagram.databinding.ActivityPostRegisterBinding
 import kotlinx.android.synthetic.main.activity_chat.*
 
 @Suppress("DEPRECATION")
 class PostRegisterActivity : AppCompatActivity() {
+    lateinit var binding: ActivityPostRegisterBinding
     private val GALLERY = 1
-    private var imageView: ImageView? = null
 
     @SuppressLint("MissingInflatedId")
     override fun onStart() {
         super.onStart()
-        setContentView(R.layout.activity_post_register)
+        binding = ActivityPostRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val pref = UserSharedPreferences
 
-        val backBtn: Button = findViewById(R.id.backHome)
-        val postingBtn: Button = findViewById(R.id.posting)
-        val editContent: EditText = findViewById(R.id.pContent)
         var postContent = ""
 
-        backBtn.setOnClickListener {
+        binding.backHome.setOnClickListener {
             this.finish()
         }
 
-        imageView = findViewById(R.id.pImage)
+        binding.pImage
 
-        imageView?.setOnClickListener {
+        binding.pImage?.setOnClickListener {
             navigatePhotos()
         }
 
-        postingBtn.isEnabled = false
+        binding.posting.isEnabled = false
 
-        editContent.addTextChangedListener(object : TextWatcher {
+        binding.pContent.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                postContent = editContent.text.toString()
+                postContent = binding.pContent.text.toString()
                 if (postContent != "") {
-                    postingBtn.isEnabled = true
+                    binding.posting.isEnabled = true
                 } else {
                     Toast.makeText(
                         this@PostRegisterActivity,
@@ -68,7 +63,7 @@ class PostRegisterActivity : AppCompatActivity() {
             }
         })
 
-        postingBtn.setOnClickListener {
+        binding.posting.setOnClickListener {
             pref.setUserPost(this, postContent)
             pref.setPostUserId(this, pref.getUserId(this))
             startActivity(Intent(this, HomeActivity::class.java))
@@ -91,7 +86,7 @@ class PostRegisterActivity : AppCompatActivity() {
                 val imageData: Uri? = data?.data
                 try {
                     val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageData)
-                    imageView!!.setImageBitmap(bitmap)
+                    binding.pImage!!.setImageBitmap(bitmap)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }

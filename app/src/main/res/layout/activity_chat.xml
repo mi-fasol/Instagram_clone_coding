@@ -52,6 +52,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
         android:textSize="16dp"
         android:text="메시지"
         />

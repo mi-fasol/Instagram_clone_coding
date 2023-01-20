@@ -2,6 +2,7 @@ package com.example.instagram.Scenarios.intro
 
 import android.content.Intent
 import android.os.Bundle
+import android.renderscript.ScriptGroup.Binding
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import com.example.instagram.Data.UserSharedPreferences
 import com.example.instagram.R
 import com.example.instagram.Scenarios.main.HomeActivity
 import com.example.instagram.Viewmodel.SignViewModel
+import com.example.instagram.databinding.ActivityMainBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -22,9 +24,12 @@ class MainActivity : AppCompatActivity() {
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val viewModel by viewModels<SignViewModel>()
 
+    private lateinit var binding : ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -40,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             viewModel.loginResult.collect { isLogin ->
                 if (isLogin && prefs.getUserNick(this@MainActivity) != "" && prefs.getUserId(this@MainActivity) != "") {
                     toHomeActivity(auth.currentUser)
-                    Log.d("shared", prefs.getUserNick(this@MainActivity).toString())
+                    Log.d("shared", prefs.getUserNick(this@MainActivity))
                 } else if (isLogin && (prefs.getUserNick(this@MainActivity) == "" || prefs.getUserId(
                         this@MainActivity
                     ) == "")

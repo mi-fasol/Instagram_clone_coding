@@ -8,10 +8,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
-        android:layout_marginLeft="5dp">
+        android:layout_marginStart="5dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/dUserImg"
+            android:id="@+id/nUserImg"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginEnd="10dp"
@@ -22,12 +22,12 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/dUserImg"
+            android:layout_toEndOf="@id/nUserImg"
             android:layout_centerVertical="true"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/dUserId"
+                android:id="@+id/nUserId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="미파솔"
@@ -36,7 +36,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/dContent"
+                android:id="@+id/nUserNick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="새로운 메시지 2개"

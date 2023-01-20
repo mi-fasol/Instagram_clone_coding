@@ -9,8 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.instagram.Adapter.PostAdapter
 import com.example.instagram.Data.UserSharedPreferences
+import com.example.instagram.R
 import com.example.instagram.Scenarios.chat.ChatActivity
 import com.example.instagram.Scenarios.main.post.PostRegisterActivity
+import com.example.instagram.Scenarios.main.post.UserPostFragment
 import com.example.instagram.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -33,8 +35,9 @@ class HomeFragment : Fragment() {
         }
 
         binding.heart.setOnClickListener {
-            val intent = Intent(activity, NotificationActivity::class.java)
-            startActivity(intent)
+            val notificationFragment = NotificationFragment()
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.fragment_container, notificationFragment)?.commit()
         }
 
         binding.dm.setOnClickListener {
@@ -51,9 +54,6 @@ class HomeFragment : Fragment() {
         binding.rvProfile.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = PostAdapter(context)
-        }
-        if (pref.getPostUserId(requireContext()) == null) {
-
         }
     }
 }

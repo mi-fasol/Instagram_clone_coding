@@ -42,9 +42,9 @@ class ChatAdapter(private var context: Context, private val images: ArrayList<Ch
         private var v: View = itemView
 
         init {
-            chatId = itemView.findViewById(R.id.dUserId)
-            chatContent = itemView.findViewById(R.id.dContent)
-            userImage = itemView.findViewById(R.id.dUserImg)
+            chatId = itemView.findViewById(R.id.nUserId)
+            chatContent = itemView.findViewById(R.id.nUserNick)
+            userImage = itemView.findViewById(R.id.nUserImg)
 
             itemView.setOnClickListener {
             }

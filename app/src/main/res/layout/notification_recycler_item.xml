@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/notiRv"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="5dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp"
+        android:layout_marginStart="5dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/nUserImg"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/profile_image" />
+
+        <TextView
+            android:id="@+id/nContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/nUserImg"
+            android:bufferType="spannable"
+            android:layout_centerVertical="true"
+            android:text="bix_xz._.1234567891234567981234567891234567891234"
+            android:textColor="@color/black"
+            android:textSize="12dp"
+            android:layout_marginEnd="60dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/postImage"
+            android:layout_width="42sp"
+            android:layout_height="42sp"
+            android:layout_alignParentEnd="true"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/cat" />
+    </RelativeLayout>
+</LinearLayout>

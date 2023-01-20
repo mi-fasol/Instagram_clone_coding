@@ -133,7 +133,7 @@ class MyPageFragment : Fragment() {
             ?.beginTransaction()
             ?.remove(this)
             ?.commit()
-        var intent = Intent(context, MainActivity::class.java)
+        val intent = Intent(context, MainActivity::class.java)
         context?.startActivity(intent)
     }
 

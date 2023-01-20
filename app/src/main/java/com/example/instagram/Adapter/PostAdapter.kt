@@ -13,6 +13,8 @@ import com.example.instagram.Data.UserSharedPreferences
 import com.example.instagram.R
 import com.example.instagram.Scenarios.main.HomeActivity
 import com.example.instagram.Scenarios.main.post.CommentActivity
+import com.example.instagram.databinding.NotificationRecyclerItemBinding
+import com.example.instagram.databinding.PostItemRecyclerBinding
 
 
 class PostAdapter(private var context: Context) :
@@ -76,13 +78,11 @@ class PostAdapter(private var context: Context) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.post_item_recycler, parent, false)
-        return ViewHolder(v)
+        val binding = PostItemRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(binding: PostItemRecyclerBinding) : RecyclerView.ViewHolder(binding.root) {
 
         var postId: TextView
         var postContent: TextView
@@ -97,17 +97,17 @@ class PostAdapter(private var context: Context) :
         val menu: Button
 
         init {
-            pUserId = itemView.findViewById(R.id.postUserId)
-            postId = itemView.findViewById(R.id.postNickname)
-            postContent = itemView.findViewById(R.id.postContent)
-            commentId = itemView.findViewById(R.id.cNickname)
-            comment = itemView.findViewById(R.id.userComment)
-            postImage = itemView.findViewById(R.id.postImage)
-            userImage = itemView.findViewById(R.id.proImg)
-            postLayout = itemView.findViewById(R.id.postLayout)
-            all = itemView.findViewById(R.id.allLayout)
-            heart = itemView.findViewById(R.id.getHeart)
-            menu = itemView.findViewById(R.id.postMenu)
+            pUserId = binding.postUserId
+            postId = binding.postNickname
+            postContent = binding.postContent
+            commentId = binding.cNickname
+            comment = binding.userComment
+            postImage = binding.postImage
+            userImage = binding.proImg
+            postLayout = binding.postLayout
+            all = binding.allLayout
+            heart = binding.getHeart
+            menu = binding.postMenu
 
             val showPopUp = PopupMenu(
                 context, menu

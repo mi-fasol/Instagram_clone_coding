@@ -11,8 +11,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.example.instagram.Data.UserSharedPreferences
 import com.example.instagram.R
+import com.example.instagram.databinding.NotificationRecyclerItemBinding
 
 
 class NotificationAdapter(private var context: Context) :
@@ -47,17 +49,11 @@ class NotificationAdapter(private var context: Context) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.notification_recycler_item, parent, false)
-        return ViewHolder(v)
+        val binding = NotificationRecyclerItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var nContent : TextView
-
-        init {
-            nContent = itemView.findViewById(R.id.nContent)
-        }
+    inner class ViewHolder(binding: NotificationRecyclerItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        val nContent : TextView = binding.nContent
     }
 }

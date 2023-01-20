@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instagram.R
 import com.example.instagram.Scenarios.main.post.UserPostFragment
+import com.example.instagram.databinding.NotificationRecyclerItemBinding
+import com.example.instagram.databinding.UserPostGridviewBinding
 
 @Suppress("DEPRECATION")
 class GridAdapter(private var context: Context) :
@@ -30,16 +32,15 @@ class GridAdapter(private var context: Context) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v =
-            LayoutInflater.from(parent.context).inflate(R.layout.user_post_gridview, parent, false)
-        return ViewHolder(v)
+        val binding = UserPostGridviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(binding: UserPostGridviewBinding) : RecyclerView.ViewHolder(binding.root) {
         private var postImage: ImageView
 
         init {
-            postImage = itemView.findViewById(R.id.myPagePost)
+            postImage = binding.myPagePost
         }
     }
 

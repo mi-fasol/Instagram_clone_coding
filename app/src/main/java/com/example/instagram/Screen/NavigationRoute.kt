@@ -21,4 +21,8 @@ class NavigationRoute : AppCompatActivity() {
 //        startActivity(intent)
 //        finish()
 //    }
+
+//    fun onFragmentChange(frag: Fragment) {
+//        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, frag).commit()
+//    }
 }

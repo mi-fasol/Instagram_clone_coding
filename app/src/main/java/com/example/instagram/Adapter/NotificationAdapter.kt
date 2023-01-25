@@ -36,7 +36,7 @@ class NotificationAdapter(private var context: Context) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var nickText= "${nId[position]}님이 회원님의 스토리를 좋아합니다."
+        var nickText= "${nId[position]}님이 회원님의 게시물을 좋아합니다."
         val builder = SpannableStringBuilder(nickText)
 
         val nickBold = StyleSpan(Typeface.BOLD)
@@ -44,7 +44,7 @@ class NotificationAdapter(private var context: Context) :
 
         holder.nContent.text = builder
 
-        holder.itemView.setOnClickListener { v ->
+        holder.itemView.setOnClickListener {
             }
     }
 

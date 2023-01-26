@@ -24,16 +24,20 @@ import com.example.instagram.R
 import com.example.instagram.Scenarios.intro.MainActivity
 import com.example.instagram.Scenarios.main.post.PostRegisterActivity
 import com.example.instagram.Scenarios.main.post.UserPostFragment
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.auth.api.signin.*
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+
 
 class MyPageFragment : Fragment() {
     private var googleSignInClient: GoogleSignInClient? = null
     lateinit var auth: FirebaseAuth
     var activity: HomeActivity? = null
+    lateinit var idToken: String
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -138,14 +142,30 @@ class MyPageFragment : Fragment() {
 
     private fun deleteId(context: Context) {
         auth = FirebaseAuth.getInstance()
-        auth.currentUser?.delete()?.addOnCompleteListener() {
-            if (it.isSuccessful) {
-                val pref = UserSharedPreferences
-                pref.removeUser(context)
-                Toast.makeText(context, "회원 탈퇴가 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                signOut()
-            } else {
-                Toast.makeText(context, "실패했습니다.", Toast.LENGTH_SHORT).show()
+        auth.currentUser?.getIdToken(true)!!.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Log.d("getIdToken", "OK")
+                val googleIdToken = task.result.token
+                val credential = GoogleAuthProvider.getCredential(googleIdToken, null)
+                auth.currentUser?.reauthenticate(credential)?.addOnCompleteListener { t ->
+                    if (t.isComplete) {
+                        Log.d("reauthenticate", "OK")
+                        auth.currentUser?.delete()?.addOnCompleteListener(requireActivity()) { d ->
+                            if (d.isSuccessful) {
+                                val pref = UserSharedPreferences
+                                pref.removeUser(context)
+                                Toast.makeText(context, "회원 탈퇴가 완료되었습니다.", Toast.LENGTH_SHORT)
+                                    .show()
+                                signOut()
+                            } else {
+                                Toast.makeText(context, d.exception.toString(), Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                        }
+                    } else {
+                        Toast.makeText(context, "reauthenticate 안 됨", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
     }

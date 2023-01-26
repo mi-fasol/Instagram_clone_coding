@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
+import androidx.core.view.isNotEmpty
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.instagram.Adapter.MyPostAdapter
@@ -26,10 +28,29 @@ class SearchFragment : Fragment() {
     ): View {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
 
+        binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                if (p0 == "" || p0 == null) {
+                    binding.searchCancel.text = "확인"
+                } else {
+                    binding.searchCancel.text = "취소"
+                }
+                return false
+            }
+
+        })
+
         binding.searchCancel.setOnClickListener {
             val intent = Intent(activity, HomeActivity::class.java)
             startActivity(intent)
         }
+
+
 
         return binding.root
     }

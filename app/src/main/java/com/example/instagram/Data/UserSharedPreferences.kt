@@ -3,7 +3,6 @@ package com.example.instagram.Data
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 
 object UserSharedPreferences {
     private lateinit var pref: SharedPreferences

@@ -1,11 +1,10 @@
 package com.example.instagram.Scenarios.main
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.instagram.R
+import androidx.fragment.app.Fragment
 import com.example.instagram.databinding.FragmentShoppingBinding
 
 class ShoppingFragment : Fragment() {

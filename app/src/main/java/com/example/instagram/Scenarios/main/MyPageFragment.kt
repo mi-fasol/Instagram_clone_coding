@@ -26,18 +26,14 @@ import com.example.instagram.Scenarios.main.post.PostRegisterActivity
 import com.example.instagram.Scenarios.main.post.UserPostFragment
 import com.google.android.gms.auth.api.signin.*
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 
 class MyPageFragment : Fragment() {
     private var googleSignInClient: GoogleSignInClient? = null
     lateinit var auth: FirebaseAuth
     var activity: HomeActivity? = null
-    lateinit var idToken: String
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -71,9 +67,7 @@ class MyPageFragment : Fragment() {
 
         launcher = registerImagePicker { result ->
             if (result.isNotEmpty()) {
-                val profileImage = result.first() // 1장만 선택하기 때문에
-
-                // 이미지 Uri를 통해 이미지뷰에 이미지를 넣어준다.
+                val profileImage = result.first()
                 setProfileImage(profileImage.uri, view)
             }
         }
@@ -108,7 +102,6 @@ class MyPageFragment : Fragment() {
         val adapter: GridAdapter by lazy { GridAdapter(requireContext()) }
         adapter.setItemClickListener(object : GridAdapter.ItemClickListener {
             override fun onClick(view: View, position: Int) {
-                Log.d("navigationnnn", "될까?")
                 activity?.onFragmentChange(UserPostFragment())
             }
         })

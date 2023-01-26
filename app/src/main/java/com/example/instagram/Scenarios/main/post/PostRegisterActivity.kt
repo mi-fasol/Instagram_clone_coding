@@ -34,9 +34,7 @@ class PostRegisterActivity : AppCompatActivity() {
             this.finish()
         }
 
-        binding.pImage
-
-        binding.pImage?.setOnClickListener {
+        binding.pImage.setOnClickListener {
             navigatePhotos()
         }
 
@@ -86,7 +84,7 @@ class PostRegisterActivity : AppCompatActivity() {
                 val imageData: Uri? = data?.data
                 try {
                     val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageData)
-                    binding.pImage!!.setImageBitmap(bitmap)
+                    binding.pImage.setImageBitmap(bitmap)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }

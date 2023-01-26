@@ -5,34 +5,33 @@
         android:id="@+id/nav_home"
         android:enabled="true"
         android:icon="@drawable/selector_btm_nav_home"
-        app:showAsAction="ifRoom"
         android:title=""
-        />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/nav_video"
         android:enabled="true"
         android:icon="@drawable/selector_btm_nav_video"
-        app:showAsAction="ifRoom"
-        android:title=""/>
+        android:title=""
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/nav_search"
         android:icon="@drawable/selector_btm_nav_search"
-        app:showAsAction="ifRoom"
-        android:title=""/>
+        android:title=""
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/nav_shopping"
         android:enabled="true"
         android:icon="@drawable/selector_btm_nav_shopping"
-        app:showAsAction="ifRoom"
-        android:title=""/>
+        android:title=""
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/nav_mypage"
         android:enabled="true"
         android:icon="@drawable/selector_btm_nav_my_page"
-        app:showAsAction="ifRoom"
-        android:title=""/>
+        android:title=""
+        app:showAsAction="ifRoom" />
 </menu>

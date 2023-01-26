@@ -1,17 +1,9 @@
 package com.example.instagram.Viewmodel
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.instagram.Data.UserSharedPreferences
-import com.example.instagram.Scenarios.intro.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow

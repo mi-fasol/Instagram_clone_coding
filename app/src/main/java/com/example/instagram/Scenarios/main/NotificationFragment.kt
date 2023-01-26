@@ -22,7 +22,7 @@ class NotificationFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentNotificationBinding.inflate(inflater, container, false)
 
         binding.back.setOnClickListener{

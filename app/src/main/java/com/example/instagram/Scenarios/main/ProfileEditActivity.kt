@@ -7,12 +7,9 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.instagram.Data.UserSharedPreferences
-import com.example.instagram.R
 import com.example.instagram.databinding.ActivityProfileEditBinding
 import java.util.regex.Pattern
 
@@ -82,7 +79,7 @@ class ProfileEditActivity : AppCompatActivity() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (binding.registerNick.text.length in 0..20) {
                     userNick = binding.registerNick.text.toString()
-                    if(userNick != "" && userId == binding.registerId.text.toString()){
+                    if (userNick != "" && userId == binding.registerId.text.toString()) {
                         binding.registerId.isEnabled = true
                     }
                 } else {
@@ -100,7 +97,7 @@ class ProfileEditActivity : AppCompatActivity() {
         })
 
         binding.registerId.setOnClickListener {
-            if(binding.registerId.text.length > 5 && binding.registerNick.text.isNotEmpty()) {
+            if (binding.registerId.text.length > 5 && binding.registerNick.text.isNotEmpty()) {
                 userPref.setUserNick(this, binding.registerNick.text.toString())
                 userPref.setUserId(this, binding.registerId.text.toString())
                 val intent = Intent(this, HomeActivity::class.java)

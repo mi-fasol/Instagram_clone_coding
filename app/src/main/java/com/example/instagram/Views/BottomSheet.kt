@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import com.example.instagram.Scenarios.intro.MainActivity
 import com.example.instagram.R
+import com.example.instagram.Scenarios.intro.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -37,7 +37,7 @@ class BottomSheet() : BottomSheetDialogFragment() {
 
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
 
-        view?.findViewById<Button>(R.id.signOutBtn)?.setOnClickListener{
+        view?.findViewById<Button>(R.id.signOutBtn)?.setOnClickListener {
             dialog?.dismiss()
             signOut()
         }

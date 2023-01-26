@@ -26,13 +26,13 @@ class CommentActivity : AppCompatActivity() {
         val pref = UserSharedPreferences
 
         binding.backNav.setOnClickListener {
-            var intent = Intent(this, HomeActivity::class.java)
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
             finish()
         }
 
         binding.send.setOnClickListener {
-            var intent = Intent(this, ChatActivity::class.java)
+            val intent = Intent(this, ChatActivity::class.java)
             startActivity(intent)
             finish()
         }

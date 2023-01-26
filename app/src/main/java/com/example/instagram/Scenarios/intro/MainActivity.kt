@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        var prefs = UserSharedPreferences
+        val prefs = UserSharedPreferences
 
         viewModel.tryLogin(this)
         lifecycleScope.launchWhenCreated {

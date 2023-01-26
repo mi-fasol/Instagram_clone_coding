@@ -18,7 +18,7 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var bottomNav = findViewById<BottomNavigationView>(R.id.bnv_main)
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bnv_main)
 
         bottomNav.run {
             setOnNavigationItemSelectedListener {

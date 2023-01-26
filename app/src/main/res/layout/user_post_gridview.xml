@@ -2,21 +2,20 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_margin="1dp"
-    android:layout_height="wrap_content"
     android:id="@+id/postGV"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="1dp"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/myPagePost"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:src="@drawable/cat"
-        app:layout_constraintDimensionRatio="H, 1:1"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        tools:ignore="MissingConstraints">
-    </ImageView>
+        android:src="@drawable/cat"
+        app:layout_constraintDimensionRatio="H, 1:1"
+        tools:ignore="MissingConstraints"></ImageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -68,9 +68,9 @@ class SignInActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == RC_SIGN_IN) {
-            var task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-                var account = task.getResult(ApiException::class.java)
+                val account = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account)
             } catch (e: ApiException) {
                 Toast.makeText(this, "구글 회원가입에 실패하였습니다: ${e.message}", Toast.LENGTH_SHORT).show()

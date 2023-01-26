@@ -24,13 +24,13 @@
             android:id="@+id/nContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/nUserImg"
-            android:bufferType="spannable"
             android:layout_centerVertical="true"
+            android:layout_marginEnd="60dp"
+            android:layout_toEndOf="@id/nUserImg"
+            android:bufferType="spannable"
             android:text="bix_xz._.1234567891234567981234567891234567891234"
             android:textColor="@color/black"
-            android:textSize="15dp"
-            android:layout_marginEnd="60dp" />
+            android:textSize="15sp" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/postImage"

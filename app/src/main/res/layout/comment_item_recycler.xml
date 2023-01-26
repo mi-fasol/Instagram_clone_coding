@@ -1,46 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/commentRv"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="10dp"
     android:layout_marginVertical="10dp"
-    android:orientation="horizontal"
-    android:id="@+id/commentRv"
-    >
+    android:orientation="horizontal">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/cUserImg"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:background="@android:color/transparent"
         android:layout_margin="2dp"
+        android:background="@android:color/transparent"
         android:src="@drawable/register_logo" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp">
+        android:layout_marginStart="5dp">
 
         <TextView
             android:id="@+id/cUserId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="alidsfjw0_.257"
-            android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="12dp"
-            />
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/cInPost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/cUserId"
-            android:text="무슨 일이야 내새끼 ㅠㅠ \n속상할 일 있어?"
-            android:layout_marginTop="3dp"
             android:layout_centerVertical="true"
+            android:layout_marginTop="3dp"
+            android:text="무슨 일이야 내새끼 ㅠㅠ \n속상할 일 있어?"
             android:textColor="@color/black"
-            android:textSize="12dp" />
+            android:textSize="12sp" />
 
     </RelativeLayout>
 

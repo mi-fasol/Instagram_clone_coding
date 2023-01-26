@@ -69,5 +69,6 @@ object UserSharedPreferences {
         pref = context.getSharedPreferences(postPref, Activity.MODE_PRIVATE)
         val editor = pref.edit()
         editor.remove("")
+        editor.apply()
     }
 }

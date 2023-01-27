@@ -135,30 +135,18 @@ class MyPageFragment : Fragment() {
 
     private fun deleteId(context: Context) {
         auth = FirebaseAuth.getInstance()
-        auth.currentUser?.getIdToken(true)!!.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                Log.d("getIdToken", "OK")
-                val googleIdToken = task.result.token
-                val credential = GoogleAuthProvider.getCredential(googleIdToken, null)
-                auth.currentUser?.reauthenticate(credential)?.addOnCompleteListener { t ->
-                    if (t.isComplete) {
-                        Log.d("reauthenticate", "OK")
-                        auth.currentUser?.delete()?.addOnCompleteListener(requireActivity()) { d ->
-                            if (d.isSuccessful) {
-                                val pref = UserSharedPreferences
-                                pref.removeUser(context)
-                                Toast.makeText(context, "회원 탈퇴가 완료되었습니다.", Toast.LENGTH_SHORT)
-                                    .show()
-                                signOut()
-                            } else {
-                                Toast.makeText(context, d.exception.toString(), Toast.LENGTH_SHORT)
-                                    .show()
-                            }
-                        }
-                    } else {
-                        Toast.makeText(context, "reauthenticate 안 됨", Toast.LENGTH_SHORT).show()
-                    }
-                }
+        auth.currentUser?.delete()?.addOnCompleteListener(requireActivity()) { d ->
+            if (d.isSuccessful) {
+                val pref = UserSharedPreferences
+                pref.removeUser(context)
+                Toast.makeText(context, "회원 탈퇴가 완료되었습니다.", Toast.LENGTH_SHORT)
+                    .show()
+                signOut()
+            } else {
+                Toast.makeText(context, d.exception.toString(), Toast.LENGTH_SHORT)
+                    .show()
+
+
             }
         }
     }

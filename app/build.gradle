@@ -63,6 +63,10 @@ dependencies {
     implementation 'com.github.esafirm:android-image-picker:3.0.0-beta1'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
-    kapt "android.arch.lifecycle:compiler:1.0.0"
 
+    kapt "android.arch.lifecycle:compiler:1.0.0"
+    apply plugin: 'com.android.application'
+    apply plugin: 'kotlin-android'
+    apply plugin: 'kotlin-android-extensions'
+    apply plugin: 'kotlin-kapt' // Use experimental kapt implementation
 }

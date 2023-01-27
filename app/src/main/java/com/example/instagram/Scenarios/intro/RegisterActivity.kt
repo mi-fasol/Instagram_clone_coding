@@ -36,21 +36,9 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
-        val filterNick = InputFilter { source, start, end, dest, dstart, dend ->
-            val ps =
-                Pattern.compile("^[a-zA-Z0-9ㄱ-ㅎ가-흐ㄱ-ㅣ가-힣\\\\u318D\\\\u119E\\\\u11A2\\\\u2022\\\\u2025a\\\\u00B7\\\\uFE55]+$")
-            if (source.equals("") || ps.matcher(source).matches()) {
-                return@InputFilter null
-            } else {
-                Toast.makeText(this, "한글 및 영어만 입력 가능합니다.", Toast.LENGTH_SHORT).show()
-                return@InputFilter ""
-            }
-        }
-
         binding.registerComplete.isEnabled = false
 
         binding.registerId.filters = arrayOf(filterId)
-        binding.registerNick.filters = arrayOf(filterNick)
 
         binding.registerId.addTextChangedListener(object : TextWatcher {
             var maxText = ""

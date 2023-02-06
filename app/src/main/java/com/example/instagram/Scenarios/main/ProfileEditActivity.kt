@@ -70,7 +70,7 @@ class ProfileEditActivity : AppCompatActivity() {
             }
         })
 
-        binding.registerNick.addTextChangedListener(object : TextWatcher {
+        binding.registerComplete.addTextChangedListener(object : TextWatcher {
             var maxText = ""
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 maxText = p0.toString()

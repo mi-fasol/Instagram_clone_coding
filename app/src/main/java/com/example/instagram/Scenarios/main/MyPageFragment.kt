@@ -143,7 +143,7 @@ class MyPageFragment : Fragment() {
                     .show()
                 signOut()
             } else {
-                Toast.makeText(context, d.exception.toString(), Toast.LENGTH_SHORT)
+                Toast.makeText(context, "로그인을 다시 한 후에 재시도 해주세요.", Toast.LENGTH_SHORT)
                     .show()
 
 
